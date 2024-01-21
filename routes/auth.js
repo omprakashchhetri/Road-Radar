@@ -1,0 +1,33 @@
+const express = require("express");
+const router = express.Router();
+
+const {
+  register,
+  login,
+  forgotpassword,
+  resetpassword,
+  addbus,
+  viewbus,
+  getbus,
+  deletebus,
+  fetchbus,
+  updatebus,
+  // getbusbysource,
+  // getbus,
+} = require("../controllers/auth");
+router.route("/register").post(register); //Similar to router.post("/register", *function*)
+
+router.route("/login").post(login);
+
+router.route("/forgotpassword").post(forgotpassword);
+
+router.route("/resetpassword/:resetToken").put(resetpassword);
+
+router.route("/addbus").post(addbus);
+router.route("/viewbus").get(viewbus);
+router.route("/getbus").post(getbus);
+router.route("/deletebus/:busno").delete(deletebus);
+router.route("/update/:busno").get(fetchbus);
+router.route("/update/:busno").put(updatebus);
+
+module.exports = router;

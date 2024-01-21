@@ -1,0 +1,243 @@
+const crypto = require("crypto");
+const User = require("../models/User");
+const Details = require("../models/BusDetails");
+const ErrorResponse = require("../utils/errorResponse");
+const sendEmail = require("../utils/sendEmail");
+
+exports.register = async (req, res, next) => {
+  const { username, email, password } = req.body;
+  try {
+    const user = await User.create({
+      username,
+      email,
+      password,
+    });
+    console.log(user);
+    sendToken(user, 201, res);
+  } catch (error) {
+    next(error);
+  }
+};
+exports.login = async (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return next(new ErrorResponse("PLease provide an email and password", 400));
+  }
+
+  try {
+    const user = await User.findOne({ email }).select("+password");
+
+    if (!user) {
+      return next(new ErrorResponse("Invalid Credentials", 404));
+    }
+
+    const isMatch = await user.matchPasswords(password);
+
+    if (!isMatch) {
+      return next(new ErrorResponse("Invalid Credentials", 401));
+    }
+    sendToken(user, 200, res);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.forgotpassword = async (req, res, next) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return next(new ErrorResponse("Email could not be send", 404));
+    }
+
+    const resetToken = user.getResetPasswordToken();
+    await user.save();
+
+    const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+
+    const message = `<h1>You Have requested a password reset</h1> 
+    <p>Please go to this Link to reset your password</p>
+    <a href=${resetUrl} clicktracking=off>${resetUrl}</a>    
+    `;
+
+    try {
+      await sendEmail({
+        to: user.email,
+        subject: "Password Reset Request",
+        text: message,
+      });
+
+      res.status(200).json({ success: true, data: "Email Sent" });
+    } catch (error) {
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined;
+
+      await user.save();
+
+      return next(new ErrorResponse("Email could not be send", 500));
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.resetpassword = async (req, res, next) => {
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.resetToken)
+    .digest("hex");
+
+  try {
+    const user = await User.findOne({
+      resetPasswordToken,
+      resetPasswordExpire: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return next(new ErrorResponse("Invalid Reset Token", 400));
+    }
+
+    user.password = req.body.password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save();
+
+    return res.status(201).json({
+      success: true,
+      data: "Password Reset Success",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+const sendToken = (user, statusCode, res) => {
+  const token = user.getSignedToken();
+  res.status(statusCode).json({ success: true, token });
+};
+
+exports.addbus = async (req, res, next) => {
+  const { busno, source, destination, via, sta, stc } = req.body;
+  try {
+    const detail = await Details.create({
+      busno,
+      source,
+      destination,
+      via,
+      sta,
+      stc,
+    });
+    res.status(200).json({ success: true, data: "Bus Added" });
+    console.log(detail);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.viewbus = async (req, res, next) => {
+  try {
+    const buses = await Details.find();
+    res.json(buses);
+  } catch (error) {
+    res.json(error);
+  }
+};
+
+exports.getbus = async (req, res, next) => {
+  const { busno } = req.body;
+
+  if (!busno) {
+    return next(new ErrorResponse("Please provide a bus number", 400));
+  }
+
+  try {
+    const bus = await Details.findOne({ busno });
+
+    if (!bus) {
+      return res.status(404).json({ error: "Invalid Bus No." });
+    }
+
+    res.json(bus);
+  } catch (error) {
+    console.error("Error fetching bus information:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+// Assuming your route is /api/auth/deletebus/:busno
+exports.deletebus = async (req, res, next) => {
+  const busno = req.params.busno; // Retrieve busno from URL parameters
+
+  if (!busno) {
+    return next(new ErrorResponse("Please provide a bus number", 400));
+  }
+
+  try {
+    const bus = await Details.findOneAndDelete({ busno: busno });
+
+    if (!bus) {
+      return res.status(404).json({ error: "Invalid Bus No." });
+    }
+
+    res.json(bus);
+  } catch (error) {
+    console.error("Error fetching bus information:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+//View a single student detail
+exports.fetchbus = async (req, res, next) => {
+  const busno = req.params.busno; // Retrieve busno from URL parameters
+
+  if (!busno) {
+    return next(new ErrorResponse("Please provide a bus number", 400));
+  }
+
+  try {
+    const bus = await Details.findOne({ busno: busno });
+
+    if (!bus) {
+      return res.status(404).json({ error: "Invalid Bus No." });
+    }
+
+    res.json(bus);
+  } catch (error) {
+    console.error("Error fetching bus information:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+//Updating Bus Detail
+exports.updatebus = async (req, res, next) => {
+  const busno = req.params.busno; // Retrieve busno from URL parameters
+
+  if (!busno) {
+    return next(new ErrorResponse("Please provide a bus number", 400));
+  }
+
+  try {
+    const bus = await Details.findOneAndUpdate(
+      { busno: busno },
+      {
+        busno: req.body.busnum,
+        source: req.body.source,
+        destination: req.body.destination,
+        via: req.body.via,
+        sta: req.body.sta,
+        stc: req.body.stc,
+      }
+    );
+
+    if (!bus) {
+      return res.status(404).json({ error: "Invalid Bus No." });
+    }
+
+    res.json(bus);
+  } catch (error) {
+    console.error("Error fetching bus information:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};

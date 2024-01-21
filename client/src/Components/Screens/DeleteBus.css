@@ -1,0 +1,21 @@
+.modal-wrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(231, 245, 255, 0.1);
+}
+
+.modal-container {
+  border: solid 2px;
+  border-color: #d69869 #4f9bd6 #4f9bd6 #d69869;
+  height: 20rem;
+  width: 23rem;
+  padding: 1.5rem 3.4rem;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 25rem;
+}
