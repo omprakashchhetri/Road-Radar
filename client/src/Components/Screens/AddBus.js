@@ -189,8 +189,8 @@ const AddBus = () => {
           </form>
         </div>
         {/* <div className="home-image-container">
-      <img src={BannerImage} alt="" />
-    </div> */}
+            <img src={BannerImage} alt="" />
+          </div> */}
         {/* <ViewBus /> */}
       </div>
       <Footer />

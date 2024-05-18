@@ -40,7 +40,7 @@ const DisplayBus = () => {
   return (
     <>
       <Navbar />
-      <div className="d-flex justify-content-center align-items-center pt-5">
+      <div className="d-flex justify-content-center align-items-center pt-4">
         <div className="table-form d-flex justify-content-center align-items-center">
           <div className="d-flex flex-column justify-content-center align-items-center bg-light rounded-5 w-100 p-5">
             <h2 className="">List of Buses:</h2>

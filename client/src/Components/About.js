@@ -10,17 +10,17 @@ const About = () => {
         <img src={AboutBackground} alt="" />
       </div> */}
       <p className="primary-subheading">About</p>
-      <div className="d-flex">
+      <div className="about-section">
         <div className="about-section-image-container">
           <img src={AboutBackgroundImage} alt="" />
         </div>
         <div className="about-section-text-container">
           <h1 className="primary-heading">What Are We?</h1>
-          <p className="primary-text">
+          <p className="primary-text about-content">
             Welcome to Road Radar! We're transforming your travel experience
             with our state-of-the-art public bus tracking system.
           </p>
-          <p className="primary-text">
+          <p className="primary-text about-content">
             Our journey started with a simple yet powerful idea: to make
             traveling more efficient and reliable, so you can plan your journey
             with peace of mind.

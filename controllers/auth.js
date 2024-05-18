@@ -146,8 +146,8 @@ exports.viewbus = async (req, res, next) => {
 };
 
 exports.getbus = async (req, res, next) => {
-  const { busno } = req.body;
-
+  const { busno } = req.body; // Changed from req.body to req.params
+  console.log(busno + "In conrroller");
   if (!busno) {
     return next(new ErrorResponse("Please provide a bus number", 400));
   }
@@ -159,7 +159,36 @@ exports.getbus = async (req, res, next) => {
       return res.status(404).json({ error: "Invalid Bus No." });
     }
 
-    res.json(bus);
+    res.status(200).json([bus]);
+  } catch (error) {
+    console.error("Error fetching bus information:", error.message);
+    next(new ErrorResponse("Internal Server Error", 500));
+  }
+};
+
+// Getting bus using source and destination
+exports.getbusbysource = async (req, res, next) => {
+  const { source, destination } = req.body;
+  console.log(source + "In conrroller");
+
+  if (!source) {
+    return next(new ErrorResponse("Please provide a Source", 400));
+  }
+
+  if (!destination) {
+    return next(new ErrorResponse("Please provide a Destination", 400));
+  }
+
+  try {
+    const buses = await Details.find({ source, destination });
+
+    if (!buses.length) {
+      return res
+        .status(404)
+        .json({ error: "No buses found for the given source and destination" });
+    }
+
+    res.status(200).json(buses);
   } catch (error) {
     console.error("Error fetching bus information:", error.message);
     res.status(500).json({ error: "Internal Server Error" });

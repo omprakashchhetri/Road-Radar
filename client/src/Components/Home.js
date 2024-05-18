@@ -25,15 +25,18 @@ const Home = () => {
     };
 
     try {
-      const response = await axios.post("/api/auth/getbus", { busno }, config);
-      // const res = await axios.post(
-      //   "/api/auth/getbusbysource",
-      //   { source, destination },
-      //   config
-      // );
-
+      // alert(busno);
+      // const response = await axios.post("/api/auth/getbus", { busno }, config);
+      const response = await axios.post(
+        "/api/auth/getbusbysource",
+        { source, destination },
+        config
+      );
+      // console.log(response);
       if (response.status >= 200 && response.status < 300) {
-        localStorage.setItem("busno", busno);
+        // localStorage.setItem("busno", busno);
+        localStorage.setItem("source", source);
+        localStorage.setItem("destination", destination);
         navigate("/getbus");
       } else {
         // Handle server response error
@@ -42,21 +45,10 @@ const Home = () => {
           setError("");
         }, 2000);
       }
-      // if (res.status >= 200 && res.status < 300) {
-      //   localStorage.setItem("source", source);
-      //   localStorage.setItem("destination", destination);
-      //   navigate("/getbus");
-      // } else {
-      //   // Handle server response error
-      //   setError("Failed. Please try again.");
-      //   setTimeout(() => {
-      //     setError("");
-      //   }, 2000);
-      // }
     } catch (error) {
       // Handle Axios request error
       console.error("Error fetching bus information:", error.message);
-      setError("Bus No. Not Found!");
+      setError("Bus Details Not Found!");
       setTimeout(() => {
         setError("");
       }, 2000);
@@ -67,7 +59,7 @@ const Home = () => {
     <div className="home-container">
       {/* <Navbar /> */}
       <div className="home-banner-container pt-5 d-flex justify-content-between align-items-center w-100">
-        <div className="home-bannerImage-container  d-flex justify-content-center">
+        <div className="home-bannerImage-container  d-flex justify-content-center align-items-center">
           <img src={BannerBackground} alt="" />
         </div>
         <div className="search-box d-flex flex-column justify-content-center align-items-center rounded-5 p-5 py-5">
@@ -85,6 +77,7 @@ const Home = () => {
                 id="number"
                 placeholder="Enter bus no."
                 value={busno}
+                readOnly
                 onChange={(e) => {
                   setBusno(e.target.value);
                 }}
@@ -106,9 +99,10 @@ const Home = () => {
               <input
                 type="text"
                 id="from"
-                className="not-allowed"
+                // className="not-allowed"
                 placeholder="Enter your source"
-                readOnly
+                // readOnly
+                required
                 value={source}
                 onChange={(e) => {
                   setSource(e.target.value);
@@ -127,8 +121,9 @@ const Home = () => {
               <input
                 type="text"
                 id="to"
-                className="not-allowed"
-                readOnly
+                // className="not-allowed"
+                // readOnly
+                required
                 placeholder="Enter the destination"
                 value={destination}
                 onChange={(e) => {
@@ -148,3 +143,9 @@ const Home = () => {
 };
 
 export default Home;
+// function firstLetter(string) {
+//   if (!string || typeof string !== "string") {
+//     return ""; // Return an empty string or handle the error as needed
+//   }
+//   return string.charAt(0).toUpperCase() + string.slice(1);
+// }

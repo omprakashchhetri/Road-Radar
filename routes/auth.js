@@ -9,11 +9,10 @@ const {
   addbus,
   viewbus,
   getbus,
+  getbusbysource,
   deletebus,
   fetchbus,
   updatebus,
-  // getbusbysource,
-  // getbus,
 } = require("../controllers/auth");
 router.route("/register").post(register); //Similar to router.post("/register", *function*)
 
@@ -26,6 +25,7 @@ router.route("/resetpassword/:resetToken").put(resetpassword);
 router.route("/addbus").post(addbus);
 router.route("/viewbus").get(viewbus);
 router.route("/getbus").post(getbus);
+router.route("/getbusbysource").post(getbusbysource);
 router.route("/deletebus/:busno").delete(deletebus);
 router.route("/update/:busno").get(fetchbus);
 router.route("/update/:busno").put(updatebus);

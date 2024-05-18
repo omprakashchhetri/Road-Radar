@@ -44,7 +44,7 @@ const Work = () => {
           exciting adventures.
         </p>
       </div>
-      <div className="work-section-bottom">
+      <div className="work-section-bottom d-flex align-items-center">
         {workInfoData.map((data) => (
           <div className="work-section-info">
             <div className="info-boxes-img-container">
