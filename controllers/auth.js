@@ -198,22 +198,23 @@ exports.getbusbysource = async (req, res, next) => {
 // Assuming your route is /api/auth/deletebus/:busno
 exports.deletebus = async (req, res, next) => {
   const busno = req.params.busno; // Retrieve busno from URL parameters
+  console.log(busno);
 
   if (!busno) {
     return next(new ErrorResponse("Please provide a bus number", 400));
   }
 
   try {
-    const bus = await Details.findOneAndDelete({ busno: busno });
+    const bus = await Details.findOneAndDelete({ busno });
 
     if (!bus) {
       return res.status(404).json({ error: "Invalid Bus No." });
     }
-
-    res.json(bus);
+    console.log(bus);
+    res.status(200).json(bus);
   } catch (error) {
     console.error("Error fetching bus information:", error.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    next(new ErrorResponse("Internal Server Error", 500));
   }
 };
 

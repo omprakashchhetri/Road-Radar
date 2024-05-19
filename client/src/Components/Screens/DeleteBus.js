@@ -11,12 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const DisplayBus = () => {
   const [buses, setBuses] = useState([]);
-  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-
-  const CloseModal = () => {
-    setShowModal(false);
-  };
 
   useEffect(() => {
     if (!localStorage.getItem("authToken")) {
@@ -38,9 +33,8 @@ const DisplayBus = () => {
     axios
       .delete(`/api/auth/deletebus/${busno}`)
       .then((response) => {
-        console.log(response);
         deleteToast();
-        window.location.reload();
+        setBuses(buses.filter((bus) => bus.busno !== busno));
       })
       .catch((err) => console.log(err));
   };
@@ -59,7 +53,7 @@ const DisplayBus = () => {
                   <tr className="">
                     <th>Bus No.</th>
                     <th>Source</th>
-                    <th>Destination </th>
+                    <th>Destination</th>
                     <th>Via</th>
                     <th>STA</th>
                     <th>STC</th>
@@ -67,40 +61,13 @@ const DisplayBus = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {buses.map((bus) => {
-                    return (
-                      <tr>
-                        <td>{bus.busno}</td>
-                        <td>{bus.source}</td>
-                        <td>{bus.destination}</td>
-                        <td>{bus.via}</td>
-                        <td>{bus.sta}</td>
-                        <td>{bus.stc}</td>
-                        <td className="d-flex">
-                          <Link
-                            to={`/update/${bus.busno}`}
-                            className="btn btn-outline-warning m-1"
-                            title="Edit"
-                          >
-                            <FiEdit />
-                          </Link>
-                          <button
-                            className="btn btn-danger m-1"
-                            title="Delete"
-                            onClick={(e) => setShowModal(true)}
-                          >
-                            <RiDeleteBin5Line />
-                          </button>
-                          {showModal && (
-                            <DeleteModal
-                              CloseModal={CloseModal}
-                              onDelete={() => handleDelete(bus.busno)}
-                            />
-                          )}
-                        </td>
-                      </tr>
-                    );
-                  })}
+                  {buses.map((bus) => (
+                    <BusRow
+                      key={bus.busno}
+                      bus={bus}
+                      handleDelete={handleDelete}
+                    />
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -109,6 +76,47 @@ const DisplayBus = () => {
       </div>
       <Footer />
     </>
+  );
+};
+
+const BusRow = ({ bus, handleDelete }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const CloseModal = () => {
+    setShowModal(false);
+  };
+
+  return (
+    <tr>
+      <td>{bus.busno}</td>
+      <td>{bus.source}</td>
+      <td>{bus.destination}</td>
+      <td>{bus.via}</td>
+      <td>{bus.sta}</td>
+      <td>{bus.stc}</td>
+      <td className="d-flex">
+        <Link
+          to={`/update/${bus.busno}`}
+          className="btn btn-outline-warning m-1"
+          title="Edit"
+        >
+          <FiEdit />
+        </Link>
+        <button
+          className="btn btn-danger m-1"
+          title="Delete"
+          onClick={() => setShowModal(true)}
+        >
+          <RiDeleteBin5Line />
+        </button>
+        {showModal && (
+          <DeleteModal
+            CloseModal={CloseModal}
+            onDelete={() => handleDelete(bus.busno)}
+          />
+        )}
+      </td>
+    </tr>
   );
 };
 
