@@ -8,9 +8,9 @@ import { FaBus } from "react-icons/fa6";
 import axios from "axios";
 
 const Home = () => {
-  const [busno, setBusno] = useState();
-  const [source, setSource] = useState();
-  const [destination, setDestination] = useState();
+  const [busno, setBusno] = useState("");
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -24,48 +24,78 @@ const Home = () => {
       },
     };
 
-    try {
-      // alert(busno);
-      // const response = await axios.post("/api/auth/getbus", { busno }, config);
-      const response = await axios.post(
-        "/api/auth/getbusbysource",
-        { source, destination },
-        config
-      );
-      // console.log(response);
-      if (response.status >= 200 && response.status < 300) {
-        // localStorage.setItem("busno", busno);
-        localStorage.setItem("source", source);
-        localStorage.setItem("destination", destination);
-        navigate("/getbus");
-      } else {
-        // Handle server response error
-        setError("Failed. Please try again.");
+    if (busno !== "" && source === "" && destination === "") {
+      try {
+        const response = await axios.post(
+          "/api/auth/getbus",
+          { busno },
+          config
+        );
+        if (response.status >= 200 && response.status < 300) {
+          localStorage.setItem("busno", busno);
+          localStorage.removeItem("source");
+          localStorage.removeItem("destination");
+          navigate("/getbus");
+        } else {
+          setError("Failed. Please try again.");
+          setTimeout(() => {
+            setError("");
+          }, 2000);
+        }
+      } catch (error) {
+        console.error("Error fetching bus information:", error.message);
+        setError("Bus Details Not Found!");
         setTimeout(() => {
           setError("");
         }, 2000);
       }
-    } catch (error) {
-      // Handle Axios request error
-      console.error("Error fetching bus information:", error.message);
-      setError("Bus Details Not Found!");
+    } else if (busno === "" && source !== "" && destination !== "") {
+      try {
+        const response = await axios.post(
+          "/api/auth/getbusbysource",
+          { source, destination },
+          config
+        );
+        if (response.status >= 200 && response.status < 300) {
+          localStorage.removeItem("busno");
+          localStorage.setItem("source", source);
+          localStorage.setItem("destination", destination);
+          navigate("/getbus");
+        } else {
+          setError("Failed. Please try again.");
+          setTimeout(() => {
+            setError("");
+          }, 2000);
+        }
+      } catch (error) {
+        console.error("Error fetching bus information:", error.message);
+        setError("Bus Details Not Found!");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
+      }
+    } else {
+      setError("Please provide either bus number or source and destination.");
       setTimeout(() => {
         setError("");
       }, 2000);
     }
   };
 
+  const capitalize = {
+    textTransform: "capitalize",
+  };
+
   return (
     <div className="home-container">
-      {/* <Navbar /> */}
       <div className="home-banner-container pt-5 d-flex justify-content-between align-items-center w-100">
-        <div className="home-bannerImage-container  d-flex justify-content-center align-items-center">
+        <div className="home-bannerImage-container d-flex justify-content-center align-items-center">
           <img src={BannerBackground} alt="" />
         </div>
         <div className="search-box d-flex flex-column justify-content-center align-items-center rounded-5 p-5 py-5">
           {error && <span className="error-message rounded-3">{error}</span>}
           <form onSubmit={findHandler} className="w-100">
-            <div className="form-group ">
+            <div className="form-group">
               <label htmlFor="number">
                 <p className="h6 fw-bold">
                   <FaBus className="mx-1 mb-1" />
@@ -76,10 +106,14 @@ const Home = () => {
                 type="text"
                 id="number"
                 placeholder="Enter bus no."
-                value={busno}
-                readOnly
+                value={busno.toUpperCase()}
+                readOnly={source !== "" || destination !== ""}
                 onChange={(e) => {
                   setBusno(e.target.value);
+                  if (e.target.value !== "") {
+                    setSource("");
+                    setDestination("");
+                  }
                 }}
                 tabIndex={1}
               />
@@ -89,7 +123,7 @@ const Home = () => {
                 <strong>OR</strong>
               </p>
             </div>
-            <div className="form-group ">
+            <div className="form-group">
               <label htmlFor="from">
                 <p className="h6 fw-bold">
                   <FaCircleDot className="mx-1 mb-1" />
@@ -99,18 +133,19 @@ const Home = () => {
               <input
                 type="text"
                 id="from"
-                // className="not-allowed"
                 placeholder="Enter your source"
-                // readOnly
-                required
                 value={source}
+                readOnly={busno !== ""}
                 onChange={(e) => {
                   setSource(e.target.value);
+                  if (e.target.value !== "") {
+                    setBusno("");
+                  }
                 }}
-                tabIndex={1}
+                tabIndex={2}
+                style={capitalize}
               />
             </div>
-
             <div className="form-group">
               <label htmlFor="to">
                 <p className="h6 fw-bold">
@@ -121,15 +156,17 @@ const Home = () => {
               <input
                 type="text"
                 id="to"
-                // className="not-allowed"
-                // readOnly
-                required
                 placeholder="Enter the destination"
                 value={destination}
+                readOnly={busno !== ""}
                 onChange={(e) => {
                   setDestination(e.target.value);
+                  if (e.target.value !== "") {
+                    setBusno("");
+                  }
                 }}
-                tabIndex={1}
+                tabIndex={3}
+                style={capitalize}
               />
             </div>
             <button type="submit" className="secondary-button w-100">
@@ -143,9 +180,3 @@ const Home = () => {
 };
 
 export default Home;
-// function firstLetter(string) {
-//   if (!string || typeof string !== "string") {
-//     return ""; // Return an empty string or handle the error as needed
-//   }
-//   return string.charAt(0).toUpperCase() + string.slice(1);
-// }
