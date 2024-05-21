@@ -494,6 +494,10 @@ div.info-boxes-img-container img.cities-logo {
 .sm_font {
   font-size: 11px;
 }
+.sm_font2 {
+  font-size: 14px;
+  font-weight: 500;
+}
 
 .marker_text1 {
   position: absolute;

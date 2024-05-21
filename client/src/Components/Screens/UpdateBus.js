@@ -9,6 +9,8 @@ const AddBus = () => {
   const [busnum, setBusNum] = useState("");
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
+  const [viaDistance, setViaDistance] = useState("");
+  const [destinationDistance, setDestinationDistance] = useState("");
   const [via, setVia] = useState("");
   const [sta, setSta] = useState("");
   const [stc, setStc] = useState("");
@@ -24,7 +26,7 @@ const AddBus = () => {
       navigate("/login");
     } else {
       axios
-        .get(`/api/auth/update/${busno}`)
+        .get(`/api/auth/fetchbus/${busno}`)
         .then((result) => {
           setBusNum(result.data.busno);
           setSource(result.data.source);
@@ -32,6 +34,8 @@ const AddBus = () => {
           setVia(result.data.via);
           setSta(result.data.sta);
           setStc(result.data.stc);
+          setViaDistance(result.data.viaDistance);
+          setDestinationDistance(result.data.destinationDistance);
           console.log(result);
         })
         .catch((err) => console.log(err));
@@ -57,6 +61,8 @@ const AddBus = () => {
           via,
           sta,
           stc,
+          viaDistance,
+          destinationDistance,
         },
         config
       );
@@ -89,7 +95,7 @@ const AddBus = () => {
           <h1>
             UPDATE <span className="text-primary">DETAILS</span>
           </h1>
-          <form onSubmit={Update} className=" w-100 p-5" action="">
+          <form onSubmit={Update} className=" w-100 p-3" action="">
             {error && <span className="error-message">{error}</span>}
             <div className="d-flex">
               <div className="m-2 mx-3">
@@ -143,6 +149,22 @@ const AddBus = () => {
                     tabIndex={1}
                   />
                 </div>
+                <div className="form-group d-flex align-items-center mt-3 ">
+                  <label htmlFor="to">
+                    <p className="h6 fw-bold">STA:</p>
+                  </label>
+                  <input
+                    type="time"
+                    required
+                    id="to"
+                    placeholder="Enter the Arrival Time"
+                    value={sta}
+                    onChange={(e) => {
+                      setSta(e.target.value);
+                    }}
+                    tabIndex={1}
+                  />
+                </div>
               </div>
               <div className="m-2 mx-3">
                 <div className="form-group">
@@ -161,18 +183,34 @@ const AddBus = () => {
                     tabIndex={1}
                   />
                 </div>
-                <div className="form-group d-flex align-items-center mt-3 ">
+                <div className="form-group">
                   <label htmlFor="to">
-                    <p className="h6 fw-bold">STA:</p>
+                    <p className="h6 fw-bold">Distance:</p>
                   </label>
                   <input
-                    type="time"
+                    type="text"
                     required
                     id="to"
-                    placeholder="Enter the Arrival Time"
-                    value={sta}
+                    placeholder="Enter Via Distance:"
+                    value={viaDistance}
                     onChange={(e) => {
-                      setSta(e.target.value);
+                      setViaDistance(e.target.value);
+                    }}
+                    tabIndex={1}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="to">
+                    <p className="h6 fw-bold">Distance::</p>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    id="to"
+                    placeholder="Enter Destination Distance:"
+                    value={destinationDistance}
+                    onChange={(e) => {
+                      setDestinationDistance(e.target.value);
                     }}
                     tabIndex={1}
                   />

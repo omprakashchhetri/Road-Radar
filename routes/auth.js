@@ -27,7 +27,7 @@ router.route("/viewbus").get(viewbus);
 router.route("/getbus").post(getbus);
 router.route("/getbusbysource").post(getbusbysource);
 router.route("/deletebus/:busno").delete(deletebus);
-router.route("/update/:busno").get(fetchbus);
+router.route("/fetchbus/:busno").get(fetchbus);
 router.route("/update/:busno").put(updatebus);
 
 module.exports = router;

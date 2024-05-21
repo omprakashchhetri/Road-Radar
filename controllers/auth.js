@@ -119,7 +119,16 @@ const sendToken = (user, statusCode, res) => {
 };
 
 exports.addbus = async (req, res, next) => {
-  const { busno, source, destination, via, sta, stc } = req.body;
+  const {
+    busno,
+    source,
+    destination,
+    via,
+    sta,
+    stc,
+    viaDistance,
+    destinationDistance,
+  } = req.body;
   try {
     const detail = await Details.create({
       busno,
@@ -127,7 +136,9 @@ exports.addbus = async (req, res, next) => {
       destination,
       via,
       sta,
+      viaDistance,
       stc,
+      destinationDistance,
     });
     res.status(200).json({ success: true, data: "Bus Added" });
     console.log(detail);
@@ -218,7 +229,7 @@ exports.deletebus = async (req, res, next) => {
   }
 };
 
-//View a single student detail
+//View a single bus detail
 exports.fetchbus = async (req, res, next) => {
   const busno = req.params.busno; // Retrieve busno from URL parameters
 
@@ -258,6 +269,8 @@ exports.updatebus = async (req, res, next) => {
         via: req.body.via,
         sta: req.body.sta,
         stc: req.body.stc,
+        viaDistance: req.body.viaDistance,
+        destinationDistance: req.body.destinationDistance,
       }
     );
 

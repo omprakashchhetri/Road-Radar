@@ -2,40 +2,15 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
-// import { RiDeleteBin5Line } from "react-icons/ri";
-// import { toast } from "sonner";
-// import DeleteModal from "../DeleteModal";
-// import { Link } from "react-router-dom";
 
 const DisplayBus = () => {
   const [buses, setBuses] = useState([]);
-  // const [showModal, setShowModal] = useState(false);
-
-  // const CloseModal = () => {
-  //   setShowModal(false);
-  // };
-
   useEffect(() => {
     axios
       .get("/api/auth/viewbus")
       .then((bus) => setBuses(bus.data))
       .catch((err) => console.log(err));
   }, []);
-
-  // const deleteToast = () => {
-  //   toast.success("Deleted!", { duration: 2000 });
-  // };
-
-  // const handleDelete = (id) => {
-  //   axios
-  //     .delete(`/api/auth/deletebus/${id}`)
-  //     .then((result) => {
-  //       console.log(result);
-  //       deleteToast();
-  //       window.location.reload();
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
 
   return (
     <>

@@ -9,6 +9,8 @@ const AddBus = () => {
   const [busno, setBusNo] = useState("");
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
+  const [viaDistance, setViaDistance] = useState("");
+  const [destinationDistance, setDestinationDistance] = useState("");
   const [via, setVia] = useState("");
   const [sta, setSta] = useState("");
   const [stc, setStc] = useState("");
@@ -37,7 +39,16 @@ const AddBus = () => {
     try {
       const response = await axios.post(
         "/api/auth/addbus",
-        { busno, source, destination, via, sta, stc },
+        {
+          busno,
+          source,
+          destination,
+          via,
+          sta,
+          stc,
+          viaDistance,
+          destinationDistance,
+        },
         config
       );
       if (response.status >= 200 && response.status < 300) {
@@ -69,7 +80,7 @@ const AddBus = () => {
           <h1>
             ADD <span className="text-primary">BUS</span>
           </h1>
-          <form onSubmit={busHandler} className=" w-100 p-5" action="">
+          <form onSubmit={busHandler} className=" w-100 p-3" action="">
             {error && <span className="error-message">{error}</span>}
             <div className="d-flex">
               <div className="m-2 mx-3">
@@ -123,6 +134,22 @@ const AddBus = () => {
                     tabIndex={1}
                   />
                 </div>
+                <div className="form-group d-flex align-items-center mt-3 ">
+                  <label htmlFor="to">
+                    <p className="h6 fw-bold">STA:</p>
+                  </label>
+                  <input
+                    type="time"
+                    required
+                    id="to"
+                    placeholder="Enter the Arrival Time"
+                    value={sta}
+                    onChange={(e) => {
+                      setSta(e.target.value);
+                    }}
+                    tabIndex={1}
+                  />
+                </div>
               </div>
               <div className="m-2 mx-3">
                 <div className="form-group">
@@ -141,18 +168,34 @@ const AddBus = () => {
                     tabIndex={1}
                   />
                 </div>
-                <div className="form-group d-flex align-items-center mt-3 ">
+                <div className="form-group">
                   <label htmlFor="to">
-                    <p className="h6 fw-bold">STA:</p>
+                    <p className="h6 fw-bold">Distance:</p>
                   </label>
                   <input
-                    type="time"
+                    type="text"
                     required
                     id="to"
-                    placeholder="Enter the Arrival Time"
-                    value={sta}
+                    placeholder="Enter Via Distance:"
+                    value={viaDistance}
                     onChange={(e) => {
-                      setSta(e.target.value);
+                      setViaDistance(e.target.value);
+                    }}
+                    tabIndex={1}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="to">
+                    <p className="h6 fw-bold">Distance::</p>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    id="to"
+                    placeholder="Enter Destination Distance:"
+                    value={destinationDistance}
+                    onChange={(e) => {
+                      setDestinationDistance(e.target.value);
                     }}
                     tabIndex={1}
                   />
