@@ -125,6 +125,7 @@ exports.addbus = async (req, res, next) => {
     destination,
     via,
     sta,
+    viaSta,
     stc,
     viaDistance,
     destinationDistance,
@@ -136,8 +137,9 @@ exports.addbus = async (req, res, next) => {
       destination,
       via,
       sta,
-      viaDistance,
+      viaSta,
       stc,
+      viaDistance,
       destinationDistance,
     });
     res.status(200).json({ success: true, data: "Bus Added" });
@@ -268,6 +270,7 @@ exports.updatebus = async (req, res, next) => {
         destination: req.body.destination,
         via: req.body.via,
         sta: req.body.sta,
+        viaSta: req.body.viaSta,
         stc: req.body.stc,
         viaDistance: req.body.viaDistance,
         destinationDistance: req.body.destinationDistance,

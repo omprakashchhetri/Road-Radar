@@ -99,9 +99,9 @@ nav {
 }
 
 .addbus {
-  height: 80%;
-  width: 50%;
-  margin-top: 6rem;
+  height: 90%;
+  width: 60%;
+  margin-top: 8rem;
 }
 
 .home-container {
@@ -506,6 +506,9 @@ div.info-boxes-img-container img.cities-logo {
 .marker_text2 {
   position: absolute;
   top: 520px;
+}
+.cstm_inp_wdt {
+  width: 70px;
 }
 @media (max-width: 1000px) {
   .navbar-links-container a {

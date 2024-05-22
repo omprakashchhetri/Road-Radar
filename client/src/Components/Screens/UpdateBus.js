@@ -12,6 +12,7 @@ const AddBus = () => {
   const [viaDistance, setViaDistance] = useState("");
   const [destinationDistance, setDestinationDistance] = useState("");
   const [via, setVia] = useState("");
+  const [viaSta, setViaSta] = useState("");
   const [sta, setSta] = useState("");
   const [stc, setStc] = useState("");
   const [error, setError] = useState("");
@@ -97,66 +98,120 @@ const AddBus = () => {
           </h1>
           <form onSubmit={Update} className=" w-100 p-3" action="">
             {error && <span className="error-message">{error}</span>}
-            <div className="d-flex">
-              <div className="m-2 mx-3">
-                <div className="form-group ">
-                  <label htmlFor="busno">
-                    <p className="h6 fw-bold">Bus no.:</p>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    id="busno"
-                    placeholder="Enter bus no."
-                    value={busnum}
-                    onChange={(e) => {
-                      setBusNum(e.target.value);
-                    }}
-                    tabIndex={1}
-                  />
-                </div>
+            <div className="d-flex flex-column">
+              <div className="d-flex">
+                <div className="m-2 mx-3 w-50">
+                  <div className="form-group ">
+                    <label htmlFor="busno">
+                      <p className="h6 fw-bold">Bus no.:</p>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      id="busno"
+                      placeholder="Enter bus no."
+                      value={busnum}
+                      onChange={(e) => {
+                        setBusNum(e.target.value);
+                      }}
+                      tabIndex={1}
+                    />
+                  </div>
 
-                <div className="form-group ">
-                  <label htmlFor="from">
-                    <p className="h6 fw-bold">Source:</p>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    id="from"
-                    placeholder="Enter your source"
-                    value={source}
-                    onChange={(e) => {
-                      setSource(e.target.value);
-                    }}
-                    tabIndex={1}
-                  />
-                </div>
+                  <div className="form-group ">
+                    <label htmlFor="from">
+                      <p className="h6 fw-bold">Source:</p>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      id="from"
+                      placeholder="Enter your source"
+                      value={source}
+                      onChange={(e) => {
+                        setSource(e.target.value);
+                      }}
+                      tabIndex={1}
+                    />
+                  </div>
 
-                <div className="form-group">
-                  <label htmlFor="to">
-                    <p className="h6 fw-bold">Destination:</p>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    id="to"
-                    placeholder="Enter the destination"
-                    value={destination}
-                    onChange={(e) => {
-                      setDestination(e.target.value);
-                    }}
-                    tabIndex={1}
-                  />
+                  <div className="form-group">
+                    <label htmlFor="to">
+                      <p className="h6 fw-bold">Destination:</p>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      id="to"
+                      placeholder="Enter the destination"
+                      value={destination}
+                      onChange={(e) => {
+                        setDestination(e.target.value);
+                      }}
+                      tabIndex={1}
+                    />
+                  </div>
                 </div>
-                <div className="form-group d-flex align-items-center mt-3 ">
-                  <label htmlFor="to">
-                    <p className="h6 fw-bold">STA:</p>
+                <div className="m-2 mx-3 w-50">
+                  <div className="form-group">
+                    <label htmlFor="to">
+                      <p className="h6 fw-bold">Via:</p>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      id="to"
+                      placeholder="Enter Via"
+                      value={via}
+                      onChange={(e) => {
+                        setVia(e.target.value);
+                      }}
+                      tabIndex={1}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="to">
+                      <p className="h6 fw-bold">Distance:</p>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      id="to"
+                      placeholder="Enter Via Distance:"
+                      value={viaDistance}
+                      onChange={(e) => {
+                        setViaDistance(e.target.value);
+                      }}
+                      tabIndex={1}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="to">
+                      <p className="h6 fw-bold">Distance::</p>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      id="to"
+                      placeholder="Enter Destination Distance:"
+                      value={destinationDistance}
+                      onChange={(e) => {
+                        setDestinationDistance(e.target.value);
+                      }}
+                      tabIndex={1}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="d-flex m-2 mx-3">
+                <div className="form-group d-flex align-items-center mt-3 mx-1">
+                  <label htmlFor="sta">
+                    <p className="h6 m-0 fw-bold">STA:</p>
                   </label>
                   <input
                     type="time"
                     required
-                    id="to"
+                    id="sta"
                     placeholder="Enter the Arrival Time"
                     value={sta}
                     onChange={(e) => {
@@ -165,64 +220,31 @@ const AddBus = () => {
                     tabIndex={1}
                   />
                 </div>
-              </div>
-              <div className="m-2 mx-3">
-                <div className="form-group">
-                  <label htmlFor="to">
-                    <p className="h6 fw-bold">Via:</p>
+                <div className="form-group d-flex align-items-center mt-3 mx-1 ">
+                  <label htmlFor="viaSta">
+                    <p className="h6 fw-bold m-0">STA Via:</p>
                   </label>
                   <input
-                    type="text"
+                    type="time"
+                    className="cstm_inp_wdt"
                     required
-                    id="to"
-                    placeholder="Enter Via"
-                    value={via}
+                    id="viaSta"
+                    placeholder="Enter the Arrival Time"
+                    value={viaSta}
                     onChange={(e) => {
-                      setVia(e.target.value);
+                      setViaSta(e.target.value);
                     }}
                     tabIndex={1}
                   />
                 </div>
-                <div className="form-group">
-                  <label htmlFor="to">
-                    <p className="h6 fw-bold">Distance:</p>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    id="to"
-                    placeholder="Enter Via Distance:"
-                    value={viaDistance}
-                    onChange={(e) => {
-                      setViaDistance(e.target.value);
-                    }}
-                    tabIndex={1}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="to">
-                    <p className="h6 fw-bold">Distance::</p>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    id="to"
-                    placeholder="Enter Destination Distance:"
-                    value={destinationDistance}
-                    onChange={(e) => {
-                      setDestinationDistance(e.target.value);
-                    }}
-                    tabIndex={1}
-                  />
-                </div>
-                <div className="form-group d-flex align-items-center">
-                  <label htmlFor="to">
+                <div className="form-group d-flex align-items-center mt-3 mx-1">
+                  <label htmlFor="stc">
                     <p className="h6 fw-bold m-0">STC:</p>
                   </label>
                   <input
                     type="time"
                     required
-                    id="to"
+                    id="stc"
                     placeholder="Enter the Completion Time"
                     value={stc}
                     onChange={(e) => {

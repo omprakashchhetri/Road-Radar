@@ -27,13 +27,17 @@ const DetailSchema = new mongoose.Schema({
     type: String,
     required: [true, "STA is required"],
   },
-  viaDistance: {
+  viaSta: {
     type: String,
-    required: [true, "Via Distance is required"],
+    required: [true, "STA for Via is required"],
   },
   stc: {
     type: String,
     required: [true, "STC is required"],
+  },
+  viaDistance: {
+    type: String,
+    required: [true, "Via Distance is required"],
   },
   destinationDistance: {
     type: String,

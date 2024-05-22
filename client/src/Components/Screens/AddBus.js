@@ -13,6 +13,7 @@ const AddBus = () => {
   const [destinationDistance, setDestinationDistance] = useState("");
   const [via, setVia] = useState("");
   const [sta, setSta] = useState("");
+  const [viaSta, setViaSta] = useState("");
   const [stc, setStc] = useState("");
   const [error, setError] = useState("");
 
@@ -45,6 +46,7 @@ const AddBus = () => {
           destination,
           via,
           sta,
+          viaSta,
           stc,
           viaDistance,
           destinationDistance,
@@ -76,14 +78,14 @@ const AddBus = () => {
     <>
       <Navbar />
       <div className="d-flex justify-content-center align-items-center w-100 vh-100">
-        <div className="addbus d-flex flex-column justify-content-center align-items-center bg-light p-2 pt-4 rounded-5">
+        <div className="addbus d-flex flex-column justify-content-center align-items-center bg-light p-2 pt-3 rounded-5">
           <h1>
             ADD <span className="text-primary">BUS</span>
           </h1>
           <form onSubmit={busHandler} className=" w-100 p-3" action="">
             {error && <span className="error-message">{error}</span>}
             <div className="d-flex">
-              <div className="m-2 mx-3">
+              <div className="m-2 mx-3 w-50">
                 <div className="form-group ">
                   <label htmlFor="busno">
                     <p className="h6 fw-bold">Bus no.:</p>
@@ -134,24 +136,8 @@ const AddBus = () => {
                     tabIndex={1}
                   />
                 </div>
-                <div className="form-group d-flex align-items-center mt-3 ">
-                  <label htmlFor="to">
-                    <p className="h6 fw-bold">STA:</p>
-                  </label>
-                  <input
-                    type="time"
-                    required
-                    id="to"
-                    placeholder="Enter the Arrival Time"
-                    value={sta}
-                    onChange={(e) => {
-                      setSta(e.target.value);
-                    }}
-                    tabIndex={1}
-                  />
-                </div>
               </div>
-              <div className="m-2 mx-3">
+              <div className="m-2 mx-3 w-50">
                 <div className="form-group">
                   <label htmlFor="to">
                     <p className="h6 fw-bold">Via:</p>
@@ -200,22 +186,57 @@ const AddBus = () => {
                     tabIndex={1}
                   />
                 </div>
-                <div className="form-group d-flex align-items-center">
-                  <label htmlFor="to">
-                    <p className="h6 fw-bold m-0">STC:</p>
-                  </label>
-                  <input
-                    type="time"
-                    required
-                    id="to"
-                    placeholder="Enter the Completion Time"
-                    value={stc}
-                    onChange={(e) => {
-                      setStc(e.target.value);
-                    }}
-                    tabIndex={1}
-                  />
-                </div>
+              </div>
+            </div>
+            <div className="d-flex m-2 mx-3">
+              <div className="form-group d-flex align-items-center mt-3 mx-1">
+                <label htmlFor="sta">
+                  <p className="h6 m-0 fw-bold">STA:</p>
+                </label>
+                <input
+                  type="time"
+                  required
+                  id="sta"
+                  placeholder="Enter the Arrival Time"
+                  value={sta}
+                  onChange={(e) => {
+                    setSta(e.target.value);
+                  }}
+                  tabIndex={1}
+                />
+              </div>
+              <div className="form-group d-flex align-items-center mt-3 mx-1 ">
+                <label htmlFor="viaSta">
+                  <p className="h6 fw-bold m-0">STA Via:</p>
+                </label>
+                <input
+                  type="time"
+                  className="cstm_inp_wdt"
+                  required
+                  id="viaSta"
+                  placeholder="Enter the Arrival Time"
+                  value={viaSta}
+                  onChange={(e) => {
+                    setViaSta(e.target.value);
+                  }}
+                  tabIndex={1}
+                />
+              </div>
+              <div className="form-group d-flex align-items-center mt-3 mx-1">
+                <label htmlFor="stc">
+                  <p className="h6 fw-bold m-0">STC:</p>
+                </label>
+                <input
+                  type="time"
+                  required
+                  id="stc"
+                  placeholder="Enter the Completion Time"
+                  value={stc}
+                  onChange={(e) => {
+                    setStc(e.target.value);
+                  }}
+                  tabIndex={1}
+                />
               </div>
             </div>
             <div className="d-flex">

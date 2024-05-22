@@ -18,6 +18,7 @@ import Admin from "./Components/Screens/Admin";
 import GetBus from "./Components/Screens/GetBus";
 import DeleteBus from "./Components/Screens/DeleteBus";
 import UpdateBus from "./Components/Screens/UpdateBus";
+import UserProfile from "./Components/Screens/Profile";
 import PageNotFound from "./Components/Screens/PageNotFound";
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/admin" element={<Admin />} />
         <Route path="/getbus" element={<GetBus />} />
         <Route path="/busroute/:busno" element={<BusPath />} />
+        <Route path="/profile/:id" element={<UserProfile />} />
         <Route path="/delete" element={<DeleteBus />} />
         <Route path="/update/:busno" element={<UpdateBus />}></Route>
         <Route path="/*" element={<PageNotFound />} />
