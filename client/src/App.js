@@ -8,7 +8,9 @@ import IndexPage from "./Components/IndexPage";
 // Screens
 // import PrivatePage from "./Components/Screens/PrivatePage";
 import LoginPage from "./Components/Screens/LoginPage";
-import RegisterPage from "./Components/Screens/RegisterPage";
+import UserLogin from "./Components/Screens/UserLogin";
+import RegisterPage from "./Components/Screens/RegisterPage"; // Admin Register Page
+import Register from "./Components/Screens/Register"; // User Register Page
 import ForgotPasswordPage from "./Components/Screens/ForgotPasswordPage";
 import ResetPasswordPage from "./Components/Screens/ResetPasswordPage";
 import AddBus from "./Components/Screens/AddBus";
@@ -30,7 +32,9 @@ const App = () => {
         </Route>
         {/* <Route path="/user" element={PrivatePage} /> */}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/userlogin" element={<UserLogin />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/userregister" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
         <Route
           path="/paswordreset/:resetToken"

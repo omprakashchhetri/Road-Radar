@@ -34,6 +34,7 @@ const AddBus = () => {
           setDestination(result.data.destination);
           setVia(result.data.via);
           setSta(result.data.sta);
+          setViaSta(result.data.viaSta);
           setStc(result.data.stc);
           setViaDistance(result.data.viaDistance);
           setDestinationDistance(result.data.destinationDistance);
@@ -61,6 +62,7 @@ const AddBus = () => {
           destination,
           via,
           sta,
+          viaSta,
           stc,
           viaDistance,
           destinationDistance,

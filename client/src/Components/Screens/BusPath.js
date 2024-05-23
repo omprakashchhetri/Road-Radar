@@ -62,6 +62,8 @@ const GetBus = () => {
     hours = hours % 12 || 12; // Convert '0' hours to '12'
     return `${hours}:${minutes} ${period}`;
   };
+  const url =
+    "https://www.google.com/maps/d/embed?mid=1SoMIhtNBJ_x2ZqOo100hi2dIcRb3TOo&ehbc=2E312F";
 
   return (
     <>
@@ -93,7 +95,7 @@ const GetBus = () => {
               </small>
             </div>
             <iframe
-              src="https://www.google.com/maps/d/embed?mid=1SoMIhtNBJ_x2ZqOo100hi2dIcRb3TOo&ehbc=2E312F"
+              src={url}
               width="500"
               height="500"
               style={{ borderRadius: "20px" }}

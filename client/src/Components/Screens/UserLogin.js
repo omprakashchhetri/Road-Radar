@@ -20,7 +20,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (!localStorage.getItem("authToken")) {
-      navigate("/login");
+      navigate("/userlogin");
     }
     // eslint-disable-next-line
   }, []);
@@ -93,7 +93,7 @@ const LoginPage = () => {
           action=""
         >
           <h1 className="login-screen__title fw-bold">
-            ADMIN <span className="text-primary">LOGIN</span>
+            USER <span className="text-primary">LOGIN</span>
           </h1>
           {error && <span className="error-message">{error}</span>}
 
@@ -133,16 +133,15 @@ const LoginPage = () => {
             Login
           </button>
           <span className="login-screen__subtext mt-3">
-            Don't have an account? <Link to="/register">Register</Link>
+            Don't have an account? <Link to="/userregister">Register</Link>
           </span>
-
           <span>
             <Link to="/forgotpassword" className="login-screen__forgotpassword">
               Forgot Password?
             </Link>
           </span>
           <span className="login-screen__subtext ">
-            Login as User? <Link to="/userlogin">Login</Link>
+            Login as Admin? <Link to="/login">Login</Link>
           </span>
         </form>
       </div>

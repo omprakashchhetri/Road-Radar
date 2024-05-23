@@ -22,9 +22,9 @@ const RegisterPage = () => {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("authToken")) {
-      navigate("/register");
-    }
+    // if (!localStorage.getItem("authToken")) {
+    //   navigate("/register");
+    // }
     // eslint-disable-next-line
   }, []);
 
@@ -96,7 +96,7 @@ const RegisterPage = () => {
           className="form-register d-flex flex-column justify-content-center align-items-center"
         >
           <h2 className="register-screen__title fw-bold">
-            ADMIN<span className="text-primary"> REGISTER</span>
+            USER <span className="text-primary">REGISTER</span>
           </h2>
           {error && <span className="error-message">{error}</span>}
           <div className="form-group">
@@ -155,7 +155,7 @@ const RegisterPage = () => {
             Register
           </button>
           <span className="register-screen__subtext mt-3">
-            Already a Admin? <Link to="/login">Login</Link>
+            Already have an account? <Link to="/userlogin">Login</Link>
           </span>
         </form>
       </div>

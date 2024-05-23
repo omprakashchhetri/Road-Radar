@@ -510,6 +510,10 @@ div.info-boxes-img-container img.cities-logo {
 .cstm_inp_wdt {
   width: 70px;
 }
+.profile_wrapper {
+  width: 100%;
+  height: 100vh;
+}
 @media (max-width: 1000px) {
   .navbar-links-container a {
     margin-right: 1rem;
