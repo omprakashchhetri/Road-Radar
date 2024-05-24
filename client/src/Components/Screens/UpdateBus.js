@@ -15,6 +15,7 @@ const AddBus = () => {
   const [viaSta, setViaSta] = useState("");
   const [sta, setSta] = useState("");
   const [stc, setStc] = useState("");
+  const [mapid, setMapid] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ const AddBus = () => {
           setStc(result.data.stc);
           setViaDistance(result.data.viaDistance);
           setDestinationDistance(result.data.destinationDistance);
+          setMapid(result.data.mapid);
           console.log(result);
         })
         .catch((err) => console.log(err));
@@ -66,6 +68,7 @@ const AddBus = () => {
           stc,
           viaDistance,
           destinationDistance,
+          mapid,
         },
         config
       );
@@ -255,6 +258,24 @@ const AddBus = () => {
                     tabIndex={1}
                   />
                 </div>
+              </div>
+            </div>
+            <div className="m-2 mx-3 w-100">
+              <div className="form-group">
+                <label htmlFor="to">
+                  <p className="h6 fw-bold">Map Id:</p>
+                </label>
+                <input
+                  type="text"
+                  required
+                  id="to"
+                  placeholder="Enter Map Id"
+                  value={mapid}
+                  onChange={(e) => {
+                    setMapid(e.target.value);
+                  }}
+                  tabIndex={1}
+                />
               </div>
             </div>
             <div className="d-flex">

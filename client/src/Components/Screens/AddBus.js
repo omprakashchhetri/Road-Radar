@@ -15,6 +15,7 @@ const AddBus = () => {
   const [sta, setSta] = useState("");
   const [viaSta, setViaSta] = useState("");
   const [stc, setStc] = useState("");
+  const [mapid, setMapid] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -50,6 +51,7 @@ const AddBus = () => {
           stc,
           viaDistance,
           destinationDistance,
+          mapid,
         },
         config
       );
@@ -178,7 +180,7 @@ const AddBus = () => {
                     type="text"
                     required
                     id="to"
-                    placeholder="Enter Destination Distance:"
+                    placeholder="Enter Destination Distance"
                     value={destinationDistance}
                     onChange={(e) => {
                       setDestinationDistance(e.target.value);
@@ -234,6 +236,24 @@ const AddBus = () => {
                   value={stc}
                   onChange={(e) => {
                     setStc(e.target.value);
+                  }}
+                  tabIndex={1}
+                />
+              </div>
+            </div>
+            <div className="m-2 mx-3 w-100">
+              <div className="form-group">
+                <label htmlFor="to">
+                  <p className="h6 fw-bold">Map Id:</p>
+                </label>
+                <input
+                  type="text"
+                  required
+                  id="to"
+                  placeholder="Enter Map Id"
+                  value={mapid}
+                  onChange={(e) => {
+                    setMapid(e.target.value);
                   }}
                   tabIndex={1}
                 />

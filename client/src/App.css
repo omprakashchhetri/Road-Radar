@@ -41,7 +41,8 @@ nav {
   align-items: center;
   background-color: #f3f0f0a4;
   justify-content: space-between;
-  min-height: 5rem;
+  min-height: 4rem;
+  height: 4.5rem;
 }
 .nav-logo-container img {
   height: 3rem;
@@ -61,8 +62,11 @@ nav {
   font-size: 1rem;
   font-weight: 500;
 }
+.nav-wrapper {
+  width: 90%;
+}
 .primary-button {
-  padding: 0.7rem 1.5rem;
+  padding: 0.6rem 1.4rem;
   background-color: #003262;
   color: #f6f6f6;
   outline: none;
@@ -74,7 +78,7 @@ nav {
   transition: 0.2s;
 }
 .primary-button2 {
-  padding: 0.7rem 1.5rem;
+  padding: 0.6rem 1.4rem;
   color: #003262;
   margin-right: 3%;
   background: none;

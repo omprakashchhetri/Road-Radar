@@ -43,6 +43,10 @@ const DetailSchema = new mongoose.Schema({
     type: String,
     required: [true, "Destination Distance is required"],
   },
+  mapid: {
+    type: String,
+    // required: [true, "Map Id is required"],
+  },
 });
 
 const Details = mongoose.model("Details", DetailSchema);

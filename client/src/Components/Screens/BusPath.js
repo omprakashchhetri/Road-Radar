@@ -6,6 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { FaBusSimple } from "react-icons/fa6";
 import { GoDash } from "react-icons/go";
 import { IoMdArrowDropright } from "react-icons/io";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const GetBus = () => {
   const { busno } = useParams();
@@ -17,11 +18,12 @@ const GetBus = () => {
   const [via, setVia] = useState("");
   const [sta, setSta] = useState("");
   const [stc, setStc] = useState("");
+  const [mapid, setMapid] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!localStorage.getItem("authToken")) {
-      navigate("/login");
+      navigate("/userlogin");
     } else {
       axios
         .get(`/api/auth/fetchbus/${busno}`)
@@ -34,6 +36,7 @@ const GetBus = () => {
           setStc(result.data.stc);
           setViaDistance(result.data.viaDistance);
           setDestinationDistance(result.data.destinationDistance);
+          setMapid(result.data.mapid);
           console.log(result);
         })
         .catch((err) => console.log(err));
@@ -41,20 +44,6 @@ const GetBus = () => {
     // eslint-disable-next-line
   }, []);
 
-  console.log(
-    busnum +
-      " " +
-      source +
-      " " +
-      destination +
-      " " +
-      via +
-      " " +
-      viaDistance +
-      " " +
-      destinationDistance +
-      " "
-  );
   const convertTo12HourFormat = (time) => {
     let [hours, minutes] = time.split(":");
     hours = parseInt(hours);
@@ -62,9 +51,12 @@ const GetBus = () => {
     hours = hours % 12 || 12; // Convert '0' hours to '12'
     return `${hours}:${minutes} ${period}`;
   };
-  const url =
-    "https://www.google.com/maps/d/embed?mid=1SoMIhtNBJ_x2ZqOo100hi2dIcRb3TOo&ehbc=2E312F";
-
+  const url = "https://www.google.com/maps/d/embed?mid=";
+  const uri = url + mapid;
+  const noMap = {
+    width: "500px",
+    height: "100%,",
+  };
   return (
     <>
       <Navbar />
@@ -73,7 +65,7 @@ const GetBus = () => {
           <h6 className="pt-2 mb-0">
             Bus no. :
             <div className="d-flex flex-column align-items-center text-start text-secondary bg-warning px-1 rounded h4">
-              {busno}
+              {busnum}
             </div>
           </h6>
         </div>
@@ -94,12 +86,22 @@ const GetBus = () => {
                 {destination}
               </small>
             </div>
-            <iframe
-              src={url}
-              width="500"
-              height="500"
-              style={{ borderRadius: "20px" }}
-            ></iframe>
+            {mapid ? (
+              <iframe
+                title={busnum}
+                src={uri}
+                width="500"
+                height="500"
+                style={{ borderRadius: "20px" }}
+              ></iframe>
+            ) : (
+              <div
+                className="d-flex justify-content-center border rounded-3 h-100 align-items-center"
+                style={noMap}
+              >
+                <ScaleLoader color="#017cff" />
+              </div>
+            )}
           </div>
           <div className="w-50 content_buspath_wrapper">
             <p className="d-flex justify-content-between bg-light p-2 px-3 rounded-2 mb-0">

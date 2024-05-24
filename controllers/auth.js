@@ -129,6 +129,7 @@ exports.addbus = async (req, res, next) => {
     stc,
     viaDistance,
     destinationDistance,
+    mapid,
   } = req.body;
   try {
     const detail = await Details.create({
@@ -141,6 +142,7 @@ exports.addbus = async (req, res, next) => {
       stc,
       viaDistance,
       destinationDistance,
+      mapid,
     });
     res.status(200).json({ success: true, data: "Bus Added" });
     console.log(detail);
@@ -160,7 +162,6 @@ exports.viewbus = async (req, res, next) => {
 
 exports.getbus = async (req, res, next) => {
   const { busno } = req.body; // Changed from req.body to req.params
-  console.log(busno + "In conrroller");
   if (!busno) {
     return next(new ErrorResponse("Please provide a bus number", 400));
   }
@@ -274,6 +275,7 @@ exports.updatebus = async (req, res, next) => {
         stc: req.body.stc,
         viaDistance: req.body.viaDistance,
         destinationDistance: req.body.destinationDistance,
+        mapid: req.body.mapid,
       }
     );
 
