@@ -41,8 +41,8 @@ const Admin = () => {
             )}
           </div>
 
-          <div className="d-flex flex-wrap  justify-content-center align-items-center  w-100 h-50 ">
-            <div className="admin-subcontainer d-flex flex-column bg-white rounded-5 justify-content-center align-items-center m-2 w-25 h-75">
+          <div className="d-flex flex-wrap justify-content-center align-items-center w-100 h-50">
+            <div className="admin-subcontainer d-flex flex-column bg-white rounded-5 justify-content-center align-items-center m-2 h-75">
               <div className="h-25 pt-4">
                 <h3 className="w-100 text-center d-flex align-items-center">
                   <SlDocs size={25} />
@@ -64,7 +64,7 @@ const Admin = () => {
                 </Link>
               </div>
             </div>
-            <div className="admin-subcontainer d-flex flex-column bg-white rounded-5 justify-content-center align-items-center m-2 w-25 h-75">
+            <div className="admin-subcontainer d-flex flex-column bg-white rounded-5 justify-content-center align-items-center m-2 h-75">
               <div className="h-25 pt-4">
                 <h3 className="w-100 text-center d-flex align-items-center">
                   <MdOutlineAdminPanelSettings />
@@ -83,7 +83,7 @@ const Admin = () => {
                 </Link>
               </div>
             </div>
-            <div className="admin-subcontainer d-flex flex-column bg-white rounded-5 justify-content-center align-items-center m-2 w-25 h-75">
+            <div className="admin-subcontainer d-flex flex-column bg-white rounded-5 justify-content-center align-items-center m-2 h-75">
               <div className="h-25 pt-4">
                 <h3 className="w-100 text-center d-flex align-items-center">
                   <FaUserFriends />
@@ -99,7 +99,7 @@ const Admin = () => {
                 </Link>
               </div>
             </div>
-            <div className="admin-subcontainer d-flex flex-column bg-white rounded-5 justify-content-center align-items-center m-2 w-25 h-75">
+            <div className="admin-subcontainer d-flex flex-column bg-white rounded-5 justify-content-center align-items-center m-2 h-75">
               <div className="h-25 pt-4">
                 <h3 className="w-100 text-center d-flex align-items-center">
                   <IoBus size={25} />

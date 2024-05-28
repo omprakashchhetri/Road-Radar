@@ -96,7 +96,7 @@ const AddBus = () => {
   return (
     <>
       <Navbar />
-      <div className="d-flex justify-content-center align-items-center w-100 vh-100">
+      <div className="d-flex justify-content-center align-items-center w-100 addbus_wrapper">
         <div className="addbus d-flex flex-column justify-content-center align-items-center bg-light p-2 pt-4 rounded-5">
           <h1>
             UPDATE <span className="text-primary">DETAILS</span>
@@ -260,7 +260,7 @@ const AddBus = () => {
                 </div>
               </div>
             </div>
-            <div className="m-2 mx-3 w-100">
+            <div className=" mx-3 w-100">
               <div className="form-group">
                 <label htmlFor="to">
                   <p className="h6 fw-bold">Map Id:</p>

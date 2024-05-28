@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { BiSolidCategory } from "react-icons/bi";
 import { IoListCircleSharp } from "react-icons/io5";
+import { RiFeedbackLine } from "react-icons/ri";
 
 import {
   Box,
@@ -31,21 +33,26 @@ const Navbar = () => {
     {
       text: "Cities",
       icon: <BiSolidCategory size={23} />,
-      link: "/",
-    },
-    {
-      text: "Bus List",
-      icon: <IoListCircleSharp size={25} />,
-      link: "/viewbus",
+      link: "/#cityList",
     },
     {
       text: "About",
       icon: <InfoIcon size={25} />,
-      link: "/viewbus",
+      link: "/#about",
+    },
+    {
+      text: "Testimonial",
+      icon: <RiFeedbackLine size={25} />,
+      link: "/#testimonial",
     },
     {
       text: "Contact",
       icon: <PhoneRoundedIcon />,
+      link: "/#contact",
+    },
+    {
+      text: "Bus List",
+      icon: <IoListCircleSharp size={25} />,
       link: "/viewbus",
     },
   ];
@@ -74,11 +81,12 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-links-container">
-          <a href="/">Home</a>
-          <a href="/">Cities</a>
+          <a href="/#home">Home</a>
+          <a href="/#cityList">Cities</a>
+          <a href="/#about">About</a>
+          <a href="/#testimonial">Testimonial</a>
+          <a href="/#contact">Contact</a>
           <a href="/viewbus">Bus List</a>
-          <a href="/">About</a>
-          <a href="/">Contact</a>
         </div>
         <div className="d-flex justify-content-center align-items-center">
           {/* <Link to="/login" className="primary-button2">
@@ -90,7 +98,7 @@ const Navbar = () => {
                 Logout
               </button>
               <Link to={"/admin"}>
-                <MdAccountCircle title="Admin Panel" size={35} />
+                <MdAccountCircle title="Admin Panel" color="#222" size={35} />
               </Link>
             </div>
           ) : (
@@ -142,9 +150,9 @@ const Navbar = () => {
                 <ListItem key={item.text} disablePadding>
                   <ListItemButton>
                     <ListItemIcon>{item.icon}</ListItemIcon>
-                    <Link to={item.link}>
+                    <a href={item.link}>
                       <ListItemText primary={item.text} />
-                    </Link>
+                    </a>
                   </ListItemButton>
                 </ListItem>
               ))}

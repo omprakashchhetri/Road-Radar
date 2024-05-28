@@ -79,7 +79,7 @@ const AddBus = () => {
   return (
     <>
       <Navbar />
-      <div className="d-flex justify-content-center align-items-center w-100 vh-100">
+      <div className="d-flex justify-content-center align-items-center w-100 ">
         <div className="addbus d-flex flex-column justify-content-center align-items-center bg-light p-2 pt-3 rounded-5">
           <h1>
             ADD <span className="text-primary">BUS</span>
@@ -241,14 +241,13 @@ const AddBus = () => {
                 />
               </div>
             </div>
-            <div className="m-2 mx-3 w-100">
+            <div className="mx-3 w-100">
               <div className="form-group">
                 <label htmlFor="to">
                   <p className="h6 fw-bold">Map Id:</p>
                 </label>
                 <input
                   type="text"
-                  required
                   id="to"
                   placeholder="Enter Map Id"
                   value={mapid}
