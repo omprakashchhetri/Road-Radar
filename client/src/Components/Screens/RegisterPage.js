@@ -45,22 +45,33 @@ const RegisterPage = () => {
       return setError("Password do not match");
     }
 
-    //try {
-    const response = await axios.post(
-      "/api/auth/register",
-      { username, email, password },
-      config
-    );
+    try {
+      const response = await axios.post(
+        "/api/auth/register",
+        { username, email, password },
+        config
+      );
 
-    if (response.status >= 200 || response.status < 300) {
-      // Registration was successful
-      RegisterToast();
-      localStorage.setItem("authToken", response.data.token);
-      localStorage.setItem("username", username);
-      navigate("/");
-    } else {
-      // Handle server response error
-      setError("Registration failed. Please try again.");
+      if (response.status >= 200 || response.status < 300) {
+        // Registration was successful
+        RegisterToast();
+        localStorage.setItem("authToken", response.data.token);
+        localStorage.setItem("username", username);
+        navigate("/");
+      } else {
+        // Handle server response error
+        setError("Registration failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error response:", error);
+      setError(
+        error.response && error.response.data && error.response.data.error
+          ? error.response.data.error
+          : "Something went wrong, please try again later"
+      );
+      setTimeout(() => {
+        setError("");
+      }, 5000);
     }
   };
 

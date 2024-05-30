@@ -4,9 +4,6 @@ import Layout from "./Components/Layout";
 import IndexPage from "./Components/IndexPage";
 
 // Routing
-
-// Screens
-// import PrivatePage from "./Components/Screens/PrivatePage";
 import LoginPage from "./Components/Screens/LoginPage";
 import UserLogin from "./Components/Screens/UserLogin";
 import RegisterPage from "./Components/Screens/RegisterPage"; // Admin Register Page
@@ -30,14 +27,13 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<IndexPage />} />
         </Route>
-        {/* <Route path="/user" element={PrivatePage} /> */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/userlogin" element={<UserLogin />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/userregister" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
         <Route
-          path="/paswordreset/:resetToken"
+          path="/passwordreset/:resetToken"
           element={<ResetPasswordPage />}
         />
         <Route path="/addbus" element={<AddBus />} />

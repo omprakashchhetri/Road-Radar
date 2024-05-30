@@ -79,7 +79,7 @@ const AddBus = () => {
   return (
     <>
       <Navbar />
-      <div className="d-flex justify-content-center align-items-center w-100 ">
+      <div className="d-flex justify-content-center align-items-center pt-5 w-100 ">
         <div className="addbus d-flex flex-column justify-content-center align-items-center bg-light p-2 pt-3 rounded-5">
           <h1>
             ADD <span className="text-primary">BUS</span>

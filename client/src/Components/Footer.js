@@ -16,7 +16,7 @@ const Footer = () => {
               <Link to="/">
                 <img src={Logo} alt="" />
               </Link>
-              <p className="text-center">
+              <p className="ps-3 pt-2">
                 We're creating a strong system to track buses in real-time,
                 making transportation management more efficient.
               </p>
@@ -41,8 +41,8 @@ const Footer = () => {
               </h5>
               <span>123-456-789</span>
               <span>roadradar@gmail.com</span>
-              <span>info.roderadar@gmail.com</span>
-              <span>help.roderadar@gmail.com</span>
+              <span>info.roadradar@gmail.com</span>
+              <span>help.roadradar@gmail.com</span>
             </div>
             <div className="footer-section-columns">
               <span>Terms & Conditions</span>

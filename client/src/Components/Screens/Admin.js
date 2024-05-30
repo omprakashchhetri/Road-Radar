@@ -22,7 +22,7 @@ const Admin = () => {
     <>
       <Navbar />
       <div className="d-flex flex-column justify-content-center align-items-center w-100 vh-100">
-        <div className="addbus admin-wrapper d-flex flex-column align-items-center pt-3 w-50 bg-light rounded-5">
+        <div className="addbus admin-wrapper d-flex flex-column align-items-center py-1 w-50 bg-light rounded-5">
           <div className="d-flex flex-column justify-content-center align-items-center mb-3">
             <TbDeviceDesktopAnalytics size={50} />
             {username ? (
@@ -59,9 +59,6 @@ const Admin = () => {
                 <Link className="text-decoration-none" to="/">
                   Home
                 </Link>
-                <Link className="text-decoration-none" to="/viewbus">
-                  Bus List
-                </Link>
               </div>
             </div>
             <div className="admin-subcontainer d-flex flex-column bg-white rounded-5 justify-content-center align-items-center m-2 h-75">
@@ -97,6 +94,9 @@ const Admin = () => {
                 <Link className="text-decoration-none" to="/userregister">
                   User Register
                 </Link>
+                <Link className="text-decoration-none" to="/profile/123">
+                  Profile
+                </Link>
               </div>
             </div>
             <div className="admin-subcontainer d-flex flex-column bg-white rounded-5 justify-content-center align-items-center m-2 h-75">
@@ -106,7 +106,11 @@ const Admin = () => {
                   &nbsp;Buses
                 </h3>
               </div>
-              <div className="h-75 d-flex flex-column pt-2"></div>
+              <div className="h-75 d-flex flex-column pt-2">
+                <Link className="text-decoration-none" to="/viewbus">
+                  Bus List
+                </Link>
+              </div>
             </div>
           </div>
         </div>

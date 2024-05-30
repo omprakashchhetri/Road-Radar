@@ -18,6 +18,7 @@ const GetBus = () => {
   const [via, setVia] = useState("");
   const [sta, setSta] = useState("");
   const [stc, setStc] = useState("");
+  const [viaSta, setViaSta] = useState("");
   const [mapid, setMapid] = useState("");
   const navigate = useNavigate();
 
@@ -35,6 +36,7 @@ const GetBus = () => {
           setSta(result.data.sta);
           setStc(result.data.stc);
           setViaDistance(result.data.viaDistance);
+          setViaSta(result.data.viaSta);
           setDestinationDistance(result.data.destinationDistance);
           setMapid(result.data.mapid);
           console.log(result);
@@ -159,7 +161,9 @@ const GetBus = () => {
                 <div className="d-flex">
                   <div className="d-flex flex-column">
                     <span className="px-2 text-success">STA</span>
-                    <small className="sm_font px-2">6:30 PM</small>
+                    <small className="sm_font px-2">
+                      {convertTo12HourFormat(viaSta)}
+                    </small>
                     {/* <small className="sm_font px-2">
                       {convertTo12HourFormat(stc)}
                     </small> */}
@@ -174,7 +178,7 @@ const GetBus = () => {
                 </span>
                 <div className="d-flex align-items-center">
                   {/* <span className="px-2">{convertTo12HourFormat(sta)}</span> */}
-                  <span className="px-2">6:30 PM</span>
+                  <span className="px-2">{convertTo12HourFormat(viaSta)}</span>
                 </div>
               </div>
 

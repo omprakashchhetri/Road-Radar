@@ -35,7 +35,7 @@ const Work = () => {
         </div>
         <div className="work-section-bottom d-flex align-items-center">
           {workInfoData.map((data) => (
-            <div className="work-section-info">
+            <div className="work-section-info" key={data.title}>
               <div className="info-boxes-img-container">
                 <img src={data.image} className="cities-logo" alt="" />
               </div>

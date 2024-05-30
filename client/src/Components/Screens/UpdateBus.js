@@ -96,7 +96,7 @@ const AddBus = () => {
   return (
     <>
       <Navbar />
-      <div className="d-flex justify-content-center align-items-center w-100 addbus_wrapper">
+      <div className="d-flex justify-content-center align-items-center w-100 pt-5 addbus_wrapper">
         <div className="addbus d-flex flex-column justify-content-center align-items-center bg-light p-2 pt-4 rounded-5">
           <h1>
             UPDATE <span className="text-primary">DETAILS</span>

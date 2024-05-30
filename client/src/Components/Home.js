@@ -92,8 +92,8 @@ const Home = () => {
         <div className="home-bannerImage-container d-flex justify-content-center align-items-center">
           <img src={BannerBackground} alt="" />
         </div>
-        <div className="w-50 d-flex flex-column justify-content-center align-items-end">
-          <div className="search-box d-flex flex-column justify-content-center align-items-center rounded-5 p-5 py-5 w-75">
+        <div className="home-cst-wt d-flex flex-column justify-content-center">
+          <div className="search-box d-flex flex-column justify-content-center align-items-center rounded-5 py-5">
             {error && <span className="error-message rounded-3">{error}</span>}
             <form onSubmit={findHandler} className="w-100">
               <div className="form-group">

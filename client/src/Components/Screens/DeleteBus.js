@@ -45,7 +45,7 @@ const DisplayBus = () => {
       <div className="d-flex justify-content-center align-items-center pt-5">
         <div className="table-form d-flex justify-content-center align-items-center">
           <div className="d-flex flex-column justify-content-center align-items-center bg-light rounded-5 w-100 p-5">
-            <h2 className="">List of Buses:</h2>
+            <h2 className="">Manage Buses:</h2>
             <hr className="text-secondary m-1" />
             <div className="over-flow">
               <table className="table table-light table-striped">

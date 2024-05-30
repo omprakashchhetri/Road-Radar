@@ -55,7 +55,7 @@ const GetBus = () => {
       <Navbar />
       <div className="d-flex flex-column align-items-center bus_details_wrapper">
         <h2 className="pt-2">
-          Bus <span className="text-primary">List</span>
+          BUS <span className="text-primary">LIST</span>
         </h2>
         <div className="d-flex flex-column align-items-center bus_details_body p-3 rounded-4">
           <div className="d-flex flex-column align-items-center  py-3 bg-white w-100 h-100">

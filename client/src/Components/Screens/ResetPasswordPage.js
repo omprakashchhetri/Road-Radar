@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 import "./ResetPasswordPage.css";
 
-const ResetPasswordPage = ({ match }) => {
+const ResetPasswordPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
+  const { resetToken } = useParams();
+  // alert(resetToken);
   const resetPasswordHandler = async (e) => {
     e.preventDefault();
 
@@ -18,7 +19,6 @@ const ResetPasswordPage = ({ match }) => {
         "Content-Type": "application/json",
       },
     };
-
     if (password !== confirmPassword) {
       setPassword("");
       setConfirmPassword("");
@@ -29,18 +29,25 @@ const ResetPasswordPage = ({ match }) => {
     }
 
     try {
-      const { data } = await axios.put(
-        `/api/auth/passwordreset/${match.params.resetToken}`,
-        {
-          password,
-        },
+      const response = await axios.put(
+        `/api/auth/passwordreset/${resetToken}`,
+        { password },
         config
       );
 
-      console.log(data);
-      setSuccess(data.data);
+      if (response && response.data) {
+        console.log(response.data);
+        setSuccess(response.data.data || "Password reset successful");
+      } else {
+        setError("Unexpected response structure");
+      }
     } catch (error) {
-      setError(error.response.data.error);
+      console.error("Error response:", error);
+      setError(
+        error.response && error.response.data && error.response.data.error
+          ? error.response.data.error
+          : "Something went wrong, please try again later"
+      );
       setTimeout(() => {
         setError("");
       }, 5000);
@@ -54,7 +61,7 @@ const ResetPasswordPage = ({ match }) => {
         className="resetpassword-screen__form"
       >
         <h3 className="resetpassword-screen__title">Reset Password</h3>
-        {error && <span className="error-message">{error} </span>}
+        {error && <span className="error-message">{error}</span>}
         {success && (
           <span className="success-message">
             {success} <Link to="/login">Login</Link>
