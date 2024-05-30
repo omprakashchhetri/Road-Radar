@@ -88,7 +88,7 @@ exports.resetpassword = async (req, res, next) => {
     .createHash("sha256")
     .update(req.params.resetToken)
     .digest("hex");
-
+  console.log(resetPasswordToken);
   try {
     const user = await User.findOne({
       resetPasswordToken,
@@ -105,14 +105,13 @@ exports.resetpassword = async (req, res, next) => {
 
     await user.save();
 
-    return res.status(201).json({
-      success: true,
-      data: "Password Reset Success",
-    });
+    return res.status(200).json({ data: "Password Reset Success" });
   } catch (error) {
     next(error);
   }
 };
+
+// Utility function (if needed)
 const sendToken = (user, statusCode, res) => {
   const token = user.getSignedToken();
   res.status(statusCode).json({ success: true, token });

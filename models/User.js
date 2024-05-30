@@ -24,6 +24,10 @@ const UserSchema = new mongoose.Schema({
     minlength: 6,
     select: false,
   },
+  isAdmin: {
+    type: String,
+    // required: [true, "Please provide Identity"],
+  },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
