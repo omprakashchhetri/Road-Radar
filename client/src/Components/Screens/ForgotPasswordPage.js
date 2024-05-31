@@ -1,13 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import "./ForgotPasswordPage.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const ForgotPasswordHandler = async (e) => {
     e.preventDefault();
@@ -26,7 +26,9 @@ const ForgotPasswordPage = () => {
       );
 
       setSuccess(data.data);
-      // navigate("/login");
+      setTimeout(() => {
+        navigate("/userlogin");
+      }, 5000);
     } catch (error) {
       setError(error.response.data.error);
       setEmail("");

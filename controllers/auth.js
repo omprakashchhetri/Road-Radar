@@ -324,3 +324,67 @@ exports.fetchuser = async (req, res, next) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+//Updating user Detail
+exports.updateuser = async (req, res, next) => {
+  const email = req.body.email; // Retrieve busno from URL parameters
+
+  if (!email) {
+    return next(new ErrorResponse("Please provide a user id", 400));
+  }
+
+  try {
+    const user = await User.findOneAndUpdate(
+      { email: email },
+      {
+        username: req.body.username,
+        email: req.body.emailId,
+        // destination: req.body.destination,
+      }
+    );
+
+    if (!user) {
+      return res.status(404).json({ error: "Invalid Email Id." });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error("Error fetching user information:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+// Change password when logged in
+exports.changepassword = async (req, res, next) => {
+  const { emailId, currentPassword, newPassword } = req.body;
+
+  if (!currentPassword || !newPassword) {
+    return next(
+      new ErrorResponse("Please provide current and new passwords", 400)
+    );
+  }
+
+  try {
+    const user = await User.findOne({ email: emailId }).select("+password");
+
+    if (!user) {
+      return next(new ErrorResponse("User not found", 404));
+    }
+
+    const isMatch = await user.matchPasswords(currentPassword);
+
+    if (!isMatch) {
+      return next(new ErrorResponse("Current password is incorrect", 401));
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Password updated successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+};

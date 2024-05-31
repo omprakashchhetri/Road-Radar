@@ -15,6 +15,8 @@ const {
   fetchbus,
   updatebus,
   fetchuser,
+  updateuser,
+  changepassword,
 } = require("../controllers/auth");
 router.route("/userregister").post(userregister); //Similar to router.post("/register", *function*)
 router.route("/adminregister").post(adminregister);
@@ -33,4 +35,7 @@ router.route("/deletebus/:busno").delete(deletebus);
 router.route("/fetchbus/:busno").get(fetchbus);
 router.route("/update/:busno").put(updatebus);
 router.route("/fetchuser/:email").get(fetchuser);
+router.route("/updateuser/:id").put(updateuser);
+router.route("/changepassword/:id").put(changepassword);
+
 module.exports = router;

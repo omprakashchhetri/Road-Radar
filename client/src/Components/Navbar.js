@@ -96,7 +96,7 @@ const Navbar = () => {
               <button onClick={logout} className="primary-button mx-2">
                 Logout
               </button>
-              <Link to={mode ? "/admin" : "/profile/123"}>
+              <Link to={mode ? "/admin" : "/profile/6658a6a5b9afdebdcc0deed8"}>
                 <MdAccountCircle
                   title={mode ? "Admin Panel" : "Profile"}
                   color="#222"
@@ -134,7 +134,9 @@ const Navbar = () => {
                 <button onClick={logout} className="primary-button mx-2">
                   Logout
                 </button>
-                <Link to={mode ? "/admin" : "/profile/123"}>
+                <Link
+                  to={mode ? "/admin" : "/profile/6658a6a5b9afdebdcc0deed8"}
+                >
                   <MdAccountCircle size={30} />
                 </Link>
               </div>

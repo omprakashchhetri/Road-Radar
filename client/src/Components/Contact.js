@@ -4,6 +4,7 @@ import { toast } from "sonner";
 
 const Contact = () => {
   const form = useRef();
+  const email = localStorage.getItem("email");
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
@@ -57,6 +58,7 @@ const Contact = () => {
                 required
                 name="user_email"
                 id="email"
+                value={email}
                 className="bg-white p-3 px-4 rounded-4"
                 placeholder="Yourmail@gmail.com"
                 tabIndex={1}

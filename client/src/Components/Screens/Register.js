@@ -4,7 +4,6 @@ import axios from "axios";
 import "./RegisterPage.css";
 import { FaXTwitter } from "react-icons/fa6";
 import { SiLinkedin } from "react-icons/si";
-// import { BsYoutube } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
 import Logo from "../../Assets/road-radar-logo.png";
 import { toast } from "sonner";
@@ -22,57 +21,60 @@ const RegisterPage = () => {
   };
 
   useEffect(() => {
-    // if (!localStorage.getItem("authToken")) {
-    //   navigate("/register");
-    // }
+    // Optional: Perform any setup logic here
     // eslint-disable-next-line
   }, []);
 
   const registerHandler = async (e) => {
     e.preventDefault();
 
+    if (password !== confirmPassword) {
+      setPassword("");
+      setConfirmPassword("");
+      setError("Passwords do not match");
+      setTimeout(() => setError(""), 5000);
+      return;
+    }
+
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-    if (password !== confirmPassword) {
-      setPassword("");
-      setConfirmPassword("");
-      setTimeout(() => {
-        setError("");
-      }, 5000);
-      return setError("Password do not match");
-    }
 
-    //try {
-    const response = await axios.post(
-      "/api/auth/userregister",
-      { username, email, password },
-      config
-    );
+    try {
+      const response = await axios.post(
+        "/api/auth/userregister",
+        { username, email, password },
+        config
+      );
 
-    if (response.status >= 200 || response.status < 300) {
-      // Registration was successful
-      RegisterToast();
-      localStorage.setItem("authToken", response.data.token);
-      localStorage.setItem("username", username);
-      localStorage.setItem("email", email);
-      navigate("/");
-    } else {
-      // Handle server response error
-      setError("Registration failed. Please try again.");
+      if (response.status >= 200 && response.status < 300) {
+        RegisterToast();
+        localStorage.setItem("authToken", response.data.token);
+        localStorage.setItem("username", username);
+        localStorage.setItem("email", email);
+        navigate("/");
+      } else {
+        setError("Registration failed. Please try again.");
+        setTimeout(() => setError(""), 5000);
+      }
+    } catch (err) {
+      setError(
+        err.response?.data?.message || "An error occurred during registration."
+      );
+      setTimeout(() => setError(""), 5000);
     }
   };
 
   return (
     <div className="register-screen flex-column">
-      <div className="rounded-5 register-screen__form d-flex  justify-content-between px-4">
+      <div className="rounded-5 register-screen__form d-flex justify-content-between px-4">
         <div className="logo-reg d-flex flex-column align-items-center">
           <div className="d-flex justify-content-center align-items-center w-100">
-            <img src={Logo} className="" alt="" />
+            <img src={Logo} className="" alt="Road Radar Logo" />
           </div>
-          <div className=" d-flex flex-column justify-content-center mt-5 align-items-center">
+          <div className="d-flex flex-column justify-content-center mt-5 align-items-center">
             <h1 className="text-primary display-2 fw-bolder">Welcome!</h1>
             <p className="paragraph-reg-login text-center mx-2 mt-2">
               Welcome to Road-Radar, where convenience meets commuting. We take
@@ -141,7 +143,7 @@ const RegisterPage = () => {
           </div>
           <div className="form-group">
             <label htmlFor="confirm-password">
-              <strong>Confirm Password:</strong>{" "}
+              <strong>Confirm Password:</strong>
             </label>
             <input
               type="password"
@@ -162,7 +164,7 @@ const RegisterPage = () => {
       </div>
       <span className="text-white mb-0 mt-2">
         Copyright © Road Radar | 2023-2024
-      </span>{" "}
+      </span>
     </div>
   );
 };

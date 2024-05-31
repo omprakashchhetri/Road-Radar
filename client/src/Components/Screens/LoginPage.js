@@ -133,11 +133,11 @@ const LoginPage = () => {
           <button type="submit" className="btn btn-primary" tabIndex={3}>
             Login
           </button>
-          <span className="login-screen__subtext mt-3">
+          {/* <span className="login-screen__subtext mt-3">
             Don't have an account? <Link to="/register">Register</Link>
-          </span>
+          </span> */}
 
-          <span>
+          <span className="pt-3">
             <Link to="/forgotpassword" className="login-screen__forgotpassword">
               Forgot Password?
             </Link>

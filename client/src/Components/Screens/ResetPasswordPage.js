@@ -64,7 +64,7 @@ const ResetPasswordPage = () => {
         {error && <span className="error-message">{error}</span>}
         {success && (
           <span className="success-message">
-            {success} <Link to="/login">Login</Link>
+            {success} <Link to="/userlogin">Login</Link>
           </span>
         )}
         <div className="form-group">

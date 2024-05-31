@@ -72,6 +72,9 @@ const Admin = () => {
                 </h3>
               </div>
               <div className="h-75 d-flex flex-column pt-2">
+                <Link className="text-decoration-none" to="/register">
+                  Admin Register
+                </Link>
                 <Link className="text-decoration-none" to="/addbus">
                   Add Bus
                 </Link>
