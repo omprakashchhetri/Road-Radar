@@ -15,7 +15,7 @@ const DisplayBus = () => {
 
   useEffect(() => {
     if (!localStorage.getItem("authToken")) {
-      navigate("/login");
+      navigate("/userlogin");
     } else {
       axios
         .get("/api/auth/viewbus")

@@ -1,12 +1,41 @@
 import React from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
+
 // import axios from "axios";
 // import { toast } from "sonner";
 // import ViewBus from "../Screens/ViewBus";
 // import { Link, useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [emailId, setEmailId] = useState("");
+  const email = localStorage.getItem("email");
+
+  useEffect(() => {
+    if (!localStorage.getItem("authToken")) {
+      navigate("/login");
+    } else {
+      axios.get(`/api/auth/fetchuser/${email}`).then((result) => {
+        setUsername(result.data.username);
+        setEmailId(result.data.email);
+      });
+    }
+
+    // eslint-disable-next-line
+  }, []);
+  const userDetailHandler = () => {
+    alert("goyo");
+  };
+
+  const passwordHandler = () => {
+    alert("goyo");
+  };
+
   return (
     <>
       <Navbar />
@@ -19,7 +48,10 @@ const Profile = () => {
                   My Profile
                 </h5>
               </div>
-              <div className="d-flex p-3 flex-column">
+              <form
+                onSubmit={userDetailHandler}
+                className="d-flex p-3 flex-column"
+              >
                 <div className="d-flex justify-content-center rounded-2 p-2 px-5">
                   <img
                     src="https://as1.ftcdn.net/v2/jpg/02/43/12/34/1000_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
@@ -30,13 +62,13 @@ const Profile = () => {
                 <div className="d-flex pt-2">
                   <div className="form-group">
                     <label htmlFor="number" className="p-0 m-0">
-                      Username
+                      Name
                     </label>
                     <input
                       type="text"
                       id="number"
                       className=""
-                      value={"John Cena"}
+                      value={username}
                       placeholder="Enter Email Id"
                       onChange={(e) => {}}
                       tabIndex={1}
@@ -52,7 +84,7 @@ const Profile = () => {
                       type="email"
                       id="email"
                       className=""
-                      value={"johndoe@gmail.com"}
+                      value={email}
                       placeholder="Enter Email Id"
                       onChange={(e) => {}}
                       tabIndex={1}
@@ -64,10 +96,13 @@ const Profile = () => {
                     Save
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
             <div className="col-6">
-              <div className="d-flex flex-column rounded-4 bg-light px-4 py-3">
+              <form
+                onSubmit={passwordHandler}
+                className="d-flex flex-column rounded-4 bg-light px-4 py-3"
+              >
                 <div className="w-100 d-flex justify-content-center">
                   <h5 className="bg-white text-center rounded-3 py-2 w-75">
                     Change Password
@@ -81,8 +116,8 @@ const Profile = () => {
                     type="text"
                     id="text"
                     className=""
-                    value={"123465"}
-                    placeholder="Enter Email Id"
+                    // value={}
+                    placeholder="Enter your Current Password"
                     onChange={(e) => {}}
                     tabIndex={1}
                   />
@@ -95,8 +130,8 @@ const Profile = () => {
                     type="text"
                     id=""
                     className=""
-                    value={"123465"}
-                    placeholder="Enter Email Id"
+                    value={""}
+                    placeholder="Enter your New Password"
                     onChange={(e) => {}}
                     tabIndex={1}
                   />
@@ -106,7 +141,7 @@ const Profile = () => {
                     Change Password
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

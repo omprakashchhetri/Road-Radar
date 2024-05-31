@@ -53,7 +53,7 @@ const GetBus = () => {
   return (
     <>
       <Navbar />
-      <div className="d-flex flex-column align-items-center bus_details_wrapper">
+      <div className="d-flex flex-column align-items-center bus_details_wrapper cstm_body_ht">
         <h2 className="pt-2">
           BUS <span className="text-primary">LIST</span>
         </h2>

@@ -431,7 +431,11 @@ div.info-boxes-img-container img.cities-logo {
   justify-content: center;
   align-items: center;
 }
-
+.admin-wrapper {
+  background: url("./Assets/admin_bg.png");
+  background-size: cover;
+  opacity: 0.9;
+}
 .admin-subcontainer {
   width: 12rem;
   height: 12rem;
@@ -542,6 +546,13 @@ div.info-boxes-img-container img.cities-logo {
 .home-cst-wt {
   width: 50%;
   align-items: end;
+}
+.cstm_admin_wt {
+  width: 80%;
+}
+
+.cstm_body_ht {
+  min-height: 40rem;
 }
 @media (max-width: 1000px) {
   .navbar-links-container a {

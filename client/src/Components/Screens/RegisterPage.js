@@ -16,7 +16,6 @@ const RegisterPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
   const RegisterToast = () => {
     toast.success("Success", { duration: 2000 });
   };
@@ -47,7 +46,7 @@ const RegisterPage = () => {
 
     try {
       const response = await axios.post(
-        "/api/auth/register",
+        "/api/auth/adminregister",
         { username, email, password },
         config
       );
@@ -57,6 +56,8 @@ const RegisterPage = () => {
         RegisterToast();
         localStorage.setItem("authToken", response.data.token);
         localStorage.setItem("username", username);
+        localStorage.setItem("email", email);
+        localStorage.setItem("mode", 1);
         navigate("/");
       } else {
         // Handle server response error

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { BiSolidCategory } from "react-icons/bi";
 import { IoListCircleSharp } from "react-icons/io5";
@@ -23,6 +22,7 @@ import Logo from "../Assets/road-radar-logo.png";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const mode = localStorage.getItem("mode");
   const menuOptions = [
     {
       text: "Home",
@@ -58,17 +58,16 @@ const Navbar = () => {
   ];
 
   const auth = localStorage.getItem("authToken");
-
   const navigate = useNavigate();
   const login = () => {
-    navigate("/login");
+    navigate("/userlogin");
   };
   const register = () => {
-    navigate("/register");
+    navigate("/userregister");
   };
   const logout = () => {
     localStorage.clear();
-    navigate("/login");
+    navigate("/userlogin");
   };
 
   return (
@@ -97,8 +96,12 @@ const Navbar = () => {
               <button onClick={logout} className="primary-button mx-2">
                 Logout
               </button>
-              <Link to={"/admin"}>
-                <MdAccountCircle title="Admin Panel" color="#222" size={35} />
+              <Link to={mode ? "/admin" : "/profile/123"}>
+                <MdAccountCircle
+                  title={mode ? "Admin Panel" : "Profile"}
+                  color="#222"
+                  size={35}
+                />
               </Link>
             </div>
           ) : (
@@ -131,7 +134,7 @@ const Navbar = () => {
                 <button onClick={logout} className="primary-button mx-2">
                   Logout
                 </button>
-                <Link to="/admin">
+                <Link to={mode ? "/admin" : "/profile/123"}>
                   <MdAccountCircle size={30} />
                 </Link>
               </div>

@@ -4,13 +4,29 @@ const Details = require("../models/BusDetails");
 const ErrorResponse = require("../utils/errorResponse");
 const sendEmail = require("../utils/sendEmail");
 
-exports.register = async (req, res, next) => {
+exports.userregister = async (req, res, next) => {
   const { username, email, password } = req.body;
   try {
     const user = await User.create({
       username,
       email,
       password,
+    });
+    console.log(user);
+    sendToken(user, 201, res);
+  } catch (error) {
+    next(error);
+  }
+};
+exports.adminregister = async (req, res, next) => {
+  const { username, email, password } = req.body;
+  const isAdmin = 1;
+  try {
+    const user = await User.create({
+      username,
+      email,
+      password,
+      isAdmin,
     });
     console.log(user);
     sendToken(user, 201, res);
@@ -26,8 +42,8 @@ exports.login = async (req, res, next) => {
 
   try {
     const user = await User.findOne({ email }).select("+password");
-
-    if (!user) {
+    const details = await User.findOne({ email });
+    if (!user || !details) {
       return next(new ErrorResponse("Invalid Credentials", 404));
     }
 
@@ -37,6 +53,7 @@ exports.login = async (req, res, next) => {
       return next(new ErrorResponse("Invalid Credentials", 401));
     }
     sendToken(user, 200, res);
+    // res.status(200).json({ data: [details] });
   } catch (error) {
     next(error);
   }
@@ -285,6 +302,25 @@ exports.updatebus = async (req, res, next) => {
     res.json(bus);
   } catch (error) {
     console.error("Error fetching bus information:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+// Get all user details
+exports.fetchuser = async (req, res, next) => {
+  const email = req.params.email; // Retrieve busno from URL parameters
+  console.log(email);
+  if (!email) {
+    return next(new ErrorResponse("Please provide a email", 400));
+  }
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ error: "Invalid Email Id." });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error("Error fetching user information:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

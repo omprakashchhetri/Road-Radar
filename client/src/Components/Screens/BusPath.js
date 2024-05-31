@@ -71,7 +71,7 @@ const GetBus = () => {
             </div>
           </h6>
         </div>
-        <div className="d-flex justify-content-center w-100 h-100">
+        <div className="d-flex justify-content-center cstm_body_ht w-100">
           <div className="d-flex flex-column align-items-center px-4 h-100">
             <div className="d-flex align-items-center border px-2 py-1 rounded-3 bg-light mb-2">
               <small className="sm_font2 ps-2 mb-0 text-secondary">

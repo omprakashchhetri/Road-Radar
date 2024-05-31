@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  register,
+  adminregister,
+  userregister,
   login,
   forgotpassword,
   resetpassword,
@@ -13,8 +14,10 @@ const {
   deletebus,
   fetchbus,
   updatebus,
+  fetchuser,
 } = require("../controllers/auth");
-router.route("/register").post(register); //Similar to router.post("/register", *function*)
+router.route("/userregister").post(userregister); //Similar to router.post("/register", *function*)
+router.route("/adminregister").post(adminregister);
 
 router.route("/login").post(login);
 
@@ -29,5 +32,5 @@ router.route("/getbusbysource").post(getbusbysource);
 router.route("/deletebus/:busno").delete(deletebus);
 router.route("/fetchbus/:busno").get(fetchbus);
 router.route("/update/:busno").put(updatebus);
-
+router.route("/fetchuser/:email").get(fetchuser);
 module.exports = router;

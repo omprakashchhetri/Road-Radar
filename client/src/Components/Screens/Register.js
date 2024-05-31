@@ -47,7 +47,7 @@ const RegisterPage = () => {
 
     //try {
     const response = await axios.post(
-      "/api/auth/register",
+      "/api/auth/userregister",
       { username, email, password },
       config
     );
@@ -57,6 +57,7 @@ const RegisterPage = () => {
       RegisterToast();
       localStorage.setItem("authToken", response.data.token);
       localStorage.setItem("username", username);
+      localStorage.setItem("email", email);
       navigate("/");
     } else {
       // Handle server response error

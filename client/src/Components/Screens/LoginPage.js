@@ -44,7 +44,8 @@ const LoginPage = () => {
       if (response && response.data && response.data.token) {
         console.log(response.data);
         localStorage.setItem("authToken", response.data.token);
-
+        localStorage.setItem("email", email);
+        localStorage.setItem("mode", 1);
         loginToast();
         navigate("/");
       } else {

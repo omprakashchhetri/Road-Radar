@@ -1,20 +1,34 @@
 import Navbar from "../Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { SlDocs } from "react-icons/sl";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
 import { IoBus } from "react-icons/io5";
 import { TbDeviceDesktopAnalytics } from "react-icons/tb";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Admin = () => {
   const navigate = useNavigate();
-  const username = localStorage.getItem("username");
+  const [id, setId] = useState("");
+  const [username, setUsername] = useState("");
+  const [emailId, setEmailId] = useState("");
+  // const [image, setImage] = useState("");
+  const email = localStorage.getItem("email");
+
   useEffect(() => {
     if (!localStorage.getItem("authToken")) {
       navigate("/login");
+    } else {
+      axios.get(`/api/auth/fetchuser/${email}`).then((result) => {
+        setId(result.data._id);
+        setUsername(result.data.username);
+        setEmailId(result.data.email);
+      });
     }
+
     // eslint-disable-next-line
   }, []);
 
@@ -22,25 +36,14 @@ const Admin = () => {
     <>
       <Navbar />
       <div className="d-flex flex-column justify-content-center align-items-center w-100 vh-100">
-        <div className="addbus admin-wrapper d-flex flex-column align-items-center py-1 w-50 bg-light rounded-5">
+        <div className="addbus admin-wrapper d-flex flex-column align-items-center py-3 cstm_admin_wt bg-light rounded-5">
           <div className="d-flex flex-column justify-content-center align-items-center mb-3">
             <TbDeviceDesktopAnalytics size={50} />
-            {username ? (
-              <>
-                <h1>
-                  ADMIN <span className="text-primary">PANEL</span>
-                </h1>
-                <h2>
-                  Welcome <span className="text-primary">{username}</span>
-                </h2>
-              </>
-            ) : (
-              <h1 className="">
-                ADMIN <span className="text-primary">PANEL</span>
-              </h1>
-            )}
+            <h1 className="">
+              ADMIN <span className="text-primary">PANEL</span>
+            </h1>
+            <h5>Welcome {username}</h5>
           </div>
-
           <div className="d-flex flex-wrap justify-content-center align-items-center w-100 h-50">
             <div className="admin-subcontainer d-flex flex-column bg-white rounded-5 justify-content-center align-items-center m-2 h-75">
               <div className="h-25 pt-4">
@@ -94,9 +97,9 @@ const Admin = () => {
                 <Link className="text-decoration-none" to="/userregister">
                   User Register
                 </Link>
-                <Link className="text-decoration-none" to="/profile/123">
+                {/* <Link className="text-decoration-none" to="/profile/123">
                   Profile
-                </Link>
+                </Link> */}
               </div>
             </div>
             <div className="admin-subcontainer d-flex flex-column bg-white rounded-5 justify-content-center align-items-center m-2 h-75">
@@ -113,6 +116,10 @@ const Admin = () => {
               </div>
             </div>
           </div>
+          <Link to={`/profile/${id}`}>
+            Go to Profile &nbsp;
+            <FaArrowRightLong />
+          </Link>
         </div>
       </div>
       <Footer />

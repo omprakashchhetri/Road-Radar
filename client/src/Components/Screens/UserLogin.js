@@ -44,6 +44,7 @@ const LoginPage = () => {
       if (response && response.data && response.data.token) {
         console.log(response.data);
         localStorage.setItem("authToken", response.data.token);
+        localStorage.setItem("email", email);
 
         loginToast();
         navigate("/");
