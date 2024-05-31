@@ -115,11 +115,11 @@ const Profile = () => {
                 className="d-flex p-3 flex-column"
               >
                 {error && <span className="error-message">{error}</span>}
-                <div className="d-flex justify-content-center rounded-2 p-2 px-5">
+                <div className="d-flex justify-content-center rounded-5 p-2 px-5">
                   <img
-                    src="https://img.freepik.com/free-vector/blond-man-with-eyeglasses-icon-isolated_24911-100831.jpg"
+                    src="https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg"
                     alt=""
-                    className="w-100 rounded-4"
+                    className="w-75 rounded-circle"
                   />
                 </div>
                 <div className="d-flex pt-2">

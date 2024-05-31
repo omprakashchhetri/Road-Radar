@@ -3,13 +3,15 @@ import "./App.css";
 import Layout from "./Components/Layout";
 import IndexPage from "./Components/IndexPage";
 
-// Routing
+// Auth Pages
 import LoginPage from "./Components/Screens/LoginPage";
 import UserLogin from "./Components/Screens/UserLogin";
 import RegisterPage from "./Components/Screens/RegisterPage"; // Admin Register Page
 import Register from "./Components/Screens/Register"; // User Register Page
 import ForgotPasswordPage from "./Components/Screens/ForgotPasswordPage";
 import ResetPasswordPage from "./Components/Screens/ResetPasswordPage";
+
+// Screens
 import AddBus from "./Components/Screens/AddBus";
 import ViewBus from "./Components/Screens/ViewBus";
 import BusPath from "./Components/Screens/BusPath";
