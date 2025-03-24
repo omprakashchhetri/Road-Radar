@@ -1,7 +1,9 @@
 ROAD-RADAR
 
 A web-based vehicle tracking system designed to monitor real-time vehicle movement and enhance transportation management.
+
 Developed using MERN stack, integrating React.js for UI, Node.js & Express.js for backend, and MongoDB for data storage.
+
 Tech: MongoDB, Express.js, React.js, Node.js (MERN Stack)
 
 Contributors:
